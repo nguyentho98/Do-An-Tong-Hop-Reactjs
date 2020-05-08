@@ -27,6 +27,9 @@ const useStyles = makeStyles(theme => ({
         fontSize: '15px',
         textDecoration:'none',
         color: 'black',
+        '&:hover':{
+            textDecoration:'none',
+        }
     },
     text_titile:{
         textTransform: 'uppercase',
@@ -35,6 +38,5 @@ const useStyles = makeStyles(theme => ({
         color: '#000',
         fontWeight:'bold'
     },
-  
 }));
 export default useStyles

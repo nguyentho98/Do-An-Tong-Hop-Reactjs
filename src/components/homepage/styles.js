@@ -64,14 +64,18 @@ const useStyles = makeStyles(theme => ({
         display:'flex',
         backgroundColor: 'transparent',
         color: '#000',
+        cursor: 'pointer',
         width: '24%',
         height: 'auto',
-        cursor:'pointer',
         border: 'thin solid #000',
         borderRadius: '4px',
         flexFlow: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+        '&:hover':{
+            textDecoration:'none',
+            color:'black'
+        }
        
     },
     menu_right_slideshow:{

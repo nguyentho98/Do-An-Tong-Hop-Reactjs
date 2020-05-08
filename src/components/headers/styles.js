@@ -3,7 +3,11 @@ const useStyles = makeStyles(theme => ({
   
     top_header: {
         backgroundColor: '#1c1c1c',
-        color: '#ffffff' 
+        color: '#ffffff',
+        position: 'fixed',
+        width: '100%',
+        top: 0,
+        zIndex: 9999
     },
     container_top_header:{
         opacity: 0.7,
@@ -24,14 +28,23 @@ const useStyles = makeStyles(theme => ({
     },
     home_page:{
         backgroundColor: '#232323',
-        
+        position: 'fixed',
+        width: '100%',
+        top: 30,
+        zIndex: 9999,  
     },
     header_container:{
         display: 'flex',
         padding:0,
     },
-    logo:{
+    imglogo:{
+      borderRadius:0,
+      backgroundColor:'#232323',
+      marginRight:'10px'
+    },
+    divlogo:{
       alignSelf:'center',
+      display:"flex",
     },
     logo_name:{
         color: '#ffffff',
@@ -103,11 +116,10 @@ const useStyles = makeStyles(theme => ({
     header_btn_2:{
       display:'flex',
       color:'white',
-      border:'1px solid',
       textAlign:'center',
       alignSelf:'center',
       cursor:'pointer',
-      padding:'10px 10px',
+      
       '&:hover':{
         carts:{
           display:'block',
@@ -134,6 +146,158 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: 'red',
       height: 100,
       display:'none',
+    },
+    user:{
+      display: 'flex',
+      alignItems: 'center',
+      textAlign: 'center',
+      verticalAlign: 'middle',
+      cursor:'pointer'
+    },
+    imguser:{
+      height:28,
+      width:28,
+      marginRight:5
+    },
+    linkhotro:{
+      color:'white',
+      '&:hover':{
+        color:'white',
+        textDecoration:'none',
+      }
+    },
+    btnuser:{
+      backgroundColor:'inherit',
+      borderColor:'white !important',
+     
+      '&:hover':{
+        backgroundColor:'inherit',
+      },
+      '&:active':{
+        backgroundColor:'#232323 !important',
+        borderColor:'white !important',
+      },
+      '&:focus': {
+        boxShadow: 'none !important',
+      },
+    },
+    btncart:{
+      backgroundColor:'inherit',
+      display:'flex',
+      padding:10,
+      borderColor:'white !important',
+      '&:hover':{
+        backgroundColor:'inherit',
+      },
+      '&:active':{
+        backgroundColor:'#232323 !important',
+        borderColor:'white !important',
+      },
+      '&:focus': {
+        boxShadow: 'none !important',
+      },
+    },
+    d_inline_block:{
+      alignSelf: 'center',
+    },
+    dropdownMenuUser:{
+      width: '280px !important',
+      right: '0 !important',
+      left: 'auto !important',
+      paddingTop:15,
+      paddingBottom:0,
+      margin: '0px 0 0 !important',
+      '&::before':{
+        content: '""',
+        position: 'absolute',
+        right: '11px',
+        top: -10,
+        width: 0,
+        height: 0,
+        borderStyle: 'solid',
+        borderWidth:' 0 10px 10px 10px',
+        borderColor: 'transparent transparent white transparent',
+        zIndex: 9999.
+      }
+    },
+    btnnaptien:{
+      marginLeft:'auto',
+      padding:'4px 8px',
+      borderRadius:3,
+      backgroundImage: 'linear-gradient(to right, #5db8ec 0%, #2584e4 51%) !important',
+      color:'black',
+      '&:hover':{
+        textDecoration:'none',
+        color:'black'
+      }
+    },
+    dropdownMenuCart:{
+      right: '0 !important',
+      left: 'auto !important',
+      margin: '0px 0 0 !important',
+      width: '360px !important',
+      '&::before':{
+        content: '""',
+        position: 'absolute',
+        right: '11px',
+        top: -10,
+        width: 0,
+        height: 0,
+        borderStyle: 'solid',
+        borderWidth:' 0 10px 10px 10px',
+        borderColor: 'transparent transparent white transparent',
+        zIndex: 9999.
+      }
+    },
+    dropdownItemUser:{
+      backgroundColor:'#f5f5f5',
+      height:45,
+      '&:hover':{
+        textDecoration:'none',
+        color:'black',
+        backgroundColor:'#f5f5f5',
+      }
+    },
+    linkItem:{
+      color:'black',
+      '&:hover':{
+        textDecoration:'none',
+        color:'black',
+        backgroundColor:'#f5f5f5',
+      }
+    },
+
+    animatedItem: {
+      height: 25,
+      width: 350,
+    
+      overflow: 'hidden',
+      position: 'relative',
+      
+    },
+    sub_marquee:{
+      display: 'block',
+      width: '200%',
+      height: '30px',
+    
+      position: 'absolute',
+      overflow: 'hidden',
+      animation: `$myEffect 8000ms linear infinite`
+    },
+    marquee_text:{
+      float: 'left',
+      width: '50%',
+    },
+    "@keyframes myEffect": {
+      "0%" :{ left: 0 },
+      "100%": { left: '-100%' }
+    },
+    logo_linkname:{
+      color:'white',
+      '&:hover':{
+          color:'white',
+          textDecoration:'none',
+      }
     }
 
    

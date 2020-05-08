@@ -24,7 +24,11 @@ const useStyles = makeStyles(theme => ({
         color:'white',
         fontSize:13,
         marginLeft:'auto',
-        padding: '10px',
+        padding: '8px',
+        '&:hover':{
+            color:'white',
+            textDecoration:'none',
+        }
     },
     title_text:{
         marginLeft:'auto',
@@ -110,7 +114,6 @@ const useStyles = makeStyles(theme => ({
           },
         },
         searchIcon: {
-          padding: theme.spacing(0, 2),
           height: '100%',
           position: 'absolute',
           pointerEvents: 'none',
@@ -178,7 +181,11 @@ const useStyles = makeStyles(theme => ({
             textDecoration:'none',
             color:'white',
             marginLeft:'auto',
-            padding: '10px',
+            padding: '8px',
+            '&:hover':{
+                color:'white',
+                textDecoration:'none',
+            }
         },
         btn_add:{
             minWidth: 40,

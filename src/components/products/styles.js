@@ -40,6 +40,9 @@ const useStyles = makeStyles(theme => ({
         margin:'0 auto',
         cursor:'pointer',
         color:'#b5b5b5',
+        '&:hover':{
+            color:'#ffb517',
+        }
     },
     btn_cart:{
         alignItems: 'center',
@@ -57,6 +60,7 @@ const useStyles = makeStyles(theme => ({
         '&:hover': {
             backgroundColor:'#21beff',
             color:'white',
+            textDecoration:'none'
         },
     },
     duongke:{
@@ -83,6 +87,13 @@ const useStyles = makeStyles(theme => ({
         border: 'unset',
         fontWeight:'bold',
     },
-   
+    cardaction:{
+        '&:hover': {
+            backgroundColor:'white',
+        },
+    },
+    cardcontent:{
+        padding:5
+    }
 }));
 export default useStyles
