@@ -16,7 +16,6 @@ const alertReducer = (state = {}, action)=> {
       return {};
     default:
       return state
-      
   }
 }
 export default alertReducer
