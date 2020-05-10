@@ -48,16 +48,6 @@ const useStyles = makeStyles(theme => ({
         borderRadius:'2%',
         height:'100px',
     },
-    thanhtoan_carts:{
-        "&::before":{
-            content: '""',
-            borderTop: '1px solid #dddddd',
-            margin: '0 auto',
-            width: 'calc(100% - 532px)',
-            position:'absolute',
-           
-        },
-    },
     thanhtoan_carts_item:{
         borderBottom: '1px solid #dddddd',
         borderRight: '1px solid #dddddd',
@@ -96,10 +86,9 @@ const useStyles = makeStyles(theme => ({
       search: {
           border: '1px solid #ddd',
           position: 'relative',
-          
           display: 'flex',
           justifyContent: 'flex-end',
-          margin: '20px auto',  
+          margin: '20px 20px 20px 20px',  
           borderRadius: theme.shape.borderRadius,
           backgroundColor: fade(theme.palette.common.white,255),
           '&:hover': {
@@ -168,25 +157,43 @@ const useStyles = makeStyles(theme => ({
             textAlign:'center',
             marginBottom:10,
         },
-        btn_napthemtien_text:{
-            textDecoration:'none',
-            color:'white'
-        },
         btn_thanhtoan:{
+            width: '87%',
+            margin: '0 auto',
+            background:'#78cc48',
+            padding: '10px',
             borderTopLeftRadius: '5px',
             borderTopRightRadius: '5px',
             borderBottomRightRadius: '5px',
             borderBottomLeftRadius: '5px',
-            background:'#279cff',
+            textAlign:'center',
+            marginBottom:10,
+        },
+        btn_napthemtien_text:{
             textDecoration:'none',
             color:'white',
-            marginLeft:'auto',
-            padding: '8px',
-            '&:hover':{
-                color:'white',
-                textDecoration:'none',
-            }
+            fontWeight:'bold'
         },
+        btn_thanhtoan_text:{
+            textDecoration:'none',
+            color:'white',
+            fontWeight:'bold'
+        },
+        // btn_thanhtoan:{
+        //     borderTopLeftRadius: '5px',
+        //     borderTopRightRadius: '5px',
+        //     borderBottomRightRadius: '5px',
+        //     borderBottomLeftRadius: '5px',
+        //     background:'#279cff',
+        //     textDecoration:'none',
+        //     color:'white',
+        //     marginLeft:'auto',
+        //     padding: '8px',
+        //     '&:hover':{
+        //         color:'white',
+        //         textDecoration:'none',
+        //     }
+        // },
         btn_add:{
             minWidth: 40,
         },

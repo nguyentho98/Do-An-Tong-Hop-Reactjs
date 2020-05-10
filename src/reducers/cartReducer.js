@@ -2,6 +2,7 @@ import * as types from '../constants/ActionTypes';
 var data=JSON.parse(localStorage.getItem('CART'))
 const productInitialState = {
     dataCart: data ? data: [],
+    dataMaGG:[]
 
 }
 const cartReducer = (state = productInitialState, action) => {
@@ -33,7 +34,20 @@ const cartReducer = (state = productInitialState, action) => {
             }
             localStorage.setItem('CART',JSON.stringify(state.dataCart))
             return {...state,dataCart:state.dataCart}
-        }          
+        }   
+        case types.GETMAGG_REQUEST:
+        return {
+            ...state,
+        }
+        case types.GETMAGG_SUCCESS:
+        return {
+            ...state,
+            dataMaGG: action.data
+        }
+        case types.GETMAGG_FAILURE:
+        return {
+            ...state, 
+        }         
         default:
             return {...state}
     }

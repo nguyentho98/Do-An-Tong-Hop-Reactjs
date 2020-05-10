@@ -8,7 +8,7 @@ import DropDownCart from './dropdowncart';
 import nuce from '../../utils/images/nuce.png';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
-function Headers({stateLogin,loggedIn}) {
+function Headers({stateLogin,loggedIn,stateUser}) {
     
     const classes = useStyles();
 

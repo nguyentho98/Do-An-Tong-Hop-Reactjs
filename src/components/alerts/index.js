@@ -16,18 +16,21 @@ const useStyles = makeStyles((theme) =>
     },
   }),
 );
-const Alerts = ({ cartSuccess, addCartSuccess, addCartClose }) => {
+const Alerts = ({ statusSuccess,addCartClose,item }) => {
   const classes = useStyles();
 
+  const surplus=JSON.parse(localStorage.getItem('USER'))
 
+ 
   return (
     <Container maxWidth="md" className={classes.root}>
-      <Collapse in={cartSuccess}>
+      <Collapse in={statusSuccess}>
         <Alert
           action={
             <IconButton
               aria-label="close"
-              color="inherit"
+             
+              severity="error"
               size="small"
               onClick={() => {
                 addCartClose();
@@ -37,22 +40,20 @@ const Alerts = ({ cartSuccess, addCartSuccess, addCartClose }) => {
             </IconButton>
           }
         >
-          Bạn đã thêm vào giỏ hàng thành công !
-              </Alert>
+          Thành công: Bạn đã thêm <span style={{color:'#337ab7 '}}>{item.ProName} </span>vào giỏ hàng !
+               </Alert>
       </Collapse>
     </Container>
   )
 }
 const mapStateToProps = (state, ownProps) => {
   return {
-    cartSuccess: state.productReducer.cartSuccess
+    statusSuccess: state.productReducer.statusSuccess,
+    item: state.productReducer.item
   }
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    addCartSuccess: () => {
-      dispatch({ type: "addCart" })
-    },
     addCartClose: () => {
       dispatch({ type: "addCartClose" })
     },

@@ -6,13 +6,23 @@ import useStyles from './styles';
 import { connect } from 'react-redux';
 import { actRemoveProductToCart } from '../../actions/CartAction';
 import { actUpdateProductToCart } from './../../actions/CartAction';
-
-function Carts({ dataCart, actRemoveProductToCart, actUpdateProductToCart }) {
+import { fetchDataMaGG } from '../../actions/CartAction';
+import IconButton from '@material-ui/core/IconButton';
+import SearchIcon from '@material-ui/icons/Search';
+function Carts({ dataCart, actRemoveProductToCart, actUpdateProductToCart,actFetchDataMaGG ,dataMaGG}) {
     const classes = useStyles();
     const [sateQuantity, setSateQuantity] = useState(1)
-
+    const [sateMagGiamGia, setSateMagGiamGia] = useState(0)
+    const [sateTemp, setSateTemp] = useState([]) // kết quả tìm kiếm của mã giảm giá
+    const [searchMaGiamGia, setSearchMaGiamGia] = useState("");
+    const surplus=JSON.parse(localStorage.getItem('USER'))
+    const handleChange = event => {
+      setSearchMaGiamGia(event.target.value);
+    };
+    
     useEffect(() => {
         window.scrollTo(0, 0)
+        actFetchDataMaGG()
     }, [])
     const RowCarts = () => {
         if (dataCart.length > 0) {
@@ -74,6 +84,42 @@ function Carts({ dataCart, actRemoveProductToCart, actUpdateProductToCart }) {
             return sateQuantity
         }
     }
+    const showTongTien = (cart) => {
+        var total = 0;
+        if(sateTemp.length>0){
+            if (cart.length > 0) {
+                for (let i = 0; i < cart.length; i++) {
+                    total += cart[i].product.ProPrice * cart[i].quantity
+                }
+            }
+            total=total-sateTemp[0].Sotiengiam
+        }else{
+            if (cart.length > 0) {
+                for (let i = 0; i < cart.length; i++) {
+                    total += cart[i].product.ProPrice * cart[i].quantity
+                }
+            } 
+        }
+        return total;
+    }
+    const OnClickSearchMaGG  = () => {
+        var temp =  dataMaGG.filter(item => item.Magiamgia === searchMaGiamGia)  
+        setSateTemp(temp)
+        if(temp.length>0){
+            setSateMagGiamGia(1)
+        }else{
+            setSateMagGiamGia(2)
+        }    
+    }
+    const ViewMaGiamGia  = () => {
+        if(sateMagGiamGia===1){
+        return <Grid style={{textAlign:'center',marginBottom: 14}}>Số tiền đc giảm của {sateTemp[0].Sotiengiam}</Grid>
+        }else if(sateMagGiamGia===2){
+            return <Grid style={{textAlign:'center',marginBottom: 14}}>Mã giảm giá không tồn tại</Grid>
+        }else{
+            return <Grid></Grid>
+        }
+    }
     return (
         <Grid>
             <Container maxWidth="md" className={classes.container_carts}>
@@ -86,6 +132,7 @@ function Carts({ dataCart, actRemoveProductToCart, actUpdateProductToCart }) {
                 </Grid>
                 <hr className={classes.duongke}></hr>
                 <Grid className={classes.thanhtoan_container}>
+                    <div style={{borderTop: '1px solid #dddddd'}}></div>
                     <Grid container className={classes.thanhtoan_carts}>
                         <RowCarts></RowCarts>
                     </Grid>
@@ -96,18 +143,23 @@ function Carts({ dataCart, actRemoveProductToCart, actUpdateProductToCart }) {
                                     <Typography className={classes.title_text_02}>MÃ GIẢM GIÁ</Typography>
                                 </Grid>
                                 <Grid className={classes.search}>
-                                    <Grid className={classes.searchIcon}>
-                                        Sử dụng
-                                    </Grid>
+                                   
                                     <InputBase
                                         placeholder="Nhập mã giảm giá..."
                                         classes={{
                                             root: classes.inputRoot,
                                             input: classes.inputInput,
                                         }}
-                                        inputProps={{ 'aria-label': 'search' }}
+                                        inputProps={{ 'aria-label': 'search' } }
+                                        value={searchMaGiamGia}
+                                        onChange={handleChange}  
                                     />
+                                    <IconButton className={classes.iconButton} aria-label="search" onClick={()=>OnClickSearchMaGG()}>
+                                        <SearchIcon />
+                                    </IconButton>
                                 </Grid>
+                                <ViewMaGiamGia></ViewMaGiamGia>
+                                
                             </Grid>
                         </Grid>
                         <Grid md={6} item className={classes.thanhtoan_action_right}>
@@ -121,7 +173,7 @@ function Carts({ dataCart, actRemoveProductToCart, actUpdateProductToCart }) {
                                 </Grid>
                                 <Grid className={classes.list_title_01}>
                                     <Typography className={classes.title}>TỔNG TIỀN</Typography>
-                                    <Typography style={{ color: 'red', marginLeft: "auto" }}>0đ </Typography>
+                                    <Typography style={{ color: 'red', marginLeft: "auto" }}>{showTongTien(dataCart)} </Typography>
                                 </Grid>
                                 <Grid className={classes.list_title_01}>
                                     <Typography style={{ color: '#8e9098' }}>Số dư hiện tại</Typography>
@@ -136,6 +188,11 @@ function Carts({ dataCart, actRemoveProductToCart, actUpdateProductToCart }) {
                                         Nạp Thêm Tiền
                                     </Link>
                                 </Grid>
+                                <Grid className={classes.btn_thanhtoan}>
+                                    <Link to="/test" className={classes.btn_thanhtoan_text}>
+                                        Thanh Toán
+                                    </Link>
+                                </Grid>
 
                             </Grid>
                         </Grid>
@@ -145,9 +202,9 @@ function Carts({ dataCart, actRemoveProductToCart, actUpdateProductToCart }) {
                                 <Link to="/" style={{ border: '1px solid #DDD', textDecoration: 'none', color: 'black', padding: 5, borderRadius: 4 }}>
                                     Tiếp tục mua hàng
                                 </Link>
-                                <Link to="/test" className={classes.btn_thanhtoan}>
+                                {/* <Link to="/test" className={classes.btn_thanhtoan}>
                                     Thanh Toán
-                                </Link>
+                                </Link> */}
 
                             </Grid>
                         </Grid>
@@ -159,7 +216,8 @@ function Carts({ dataCart, actRemoveProductToCart, actUpdateProductToCart }) {
 }
 const mapStateToProps = (state, ownProps) => {
     return {
-        dataCart: state.cartReducer.dataCart
+        dataCart: state.cartReducer.dataCart,
+        dataMaGG: state.cartReducer.dataMaGG
     }
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -169,6 +227,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         actUpdateProductToCart: (product, quantity) => {
             dispatch(actUpdateProductToCart(product, quantity))
+        },
+        actFetchDataMaGG: () => {
+            dispatch(fetchDataMaGG())
         }
     }
 }

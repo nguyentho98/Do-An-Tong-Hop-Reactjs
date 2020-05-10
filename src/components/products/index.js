@@ -12,7 +12,7 @@ import { actAddToCart } from '../../actions/CartAction';
 import { connect } from 'react-redux'
 import { history } from './../../reducers/history';
 
-function Products({ appDataDT, fetchDataProduct, addCartSuceess, actAddToCart ,match}) {
+function Products({ appDataDT, fetchDataProduct, addCartSuceess, actAddToCart ,addCartClose}) {
     const classes = useStyles();
     
     useEffect(() => {
@@ -20,18 +20,17 @@ function Products({ appDataDT, fetchDataProduct, addCartSuceess, actAddToCart ,m
     }, [])
 
     const onClickAddCartSuccess = (item) => {
-        addCartSuceess()
+        addCartSuceess(item)
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
         actAddToCart(item)
+        setTimeout(()=>addCartClose(),3000)
+      
     }
     const onClickAddCarts = (item) => {
-        // actAddToCart(item)
-        console.log("xin chào");
+        actAddToCart(item)
         if(localStorage.getItem('USER')){
-            console.log("xin chào1");
             return history.push("/cart");
         }else{
-            console.log("xin chào2");
             return history.push("/login");
         }
     }
@@ -99,7 +98,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         fetchDataProduct: () => dispatch(fetchDataProduct()),
-        addCartSuceess: () => dispatch({ type: "addCart" }),
+        addCartSuceess: (item) => dispatch({ type: "addCart",item }),
+        addCartClose: () => dispatch({ type: "addCartClose" }),
         actAddToCart: (payload) => {
             dispatch(actAddToCart(payload, 1))
         },

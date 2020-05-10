@@ -2,9 +2,11 @@ import { FETCHING_DATAPRODUCT, FETCHING_DATAPRODUCT_SUCCESS, FETCHING_DATAPRODUC
 const productInitialState = {
     dataProduct: [],
 
-    cartSuccess:false,
+    statusSuccess:false,
 
-    listCart:[]
+    listCart:[],
+
+    item:{},
 }
 const productReducer = (state = productInitialState, action) => {
 switch (action.type) {
@@ -12,31 +14,26 @@ switch (action.type) {
     case FETCHING_DATAPRODUCT:
     return {
         ...state,
-        dataProduct: [],
-        isFetching: true
     }
     case FETCHING_DATAPRODUCT_SUCCESS:
     return {
         ...state,
-        isFetching: false,
         dataProduct: action.data
     }
     case FETCHING_DATAPRODUCT_FAILURE:
     return {
-        ...state,
-        isFetching: false,
-        error: true
+        ...state, 
     }  
-    // hết      
     // Thêm vào giỏ Hàng
     case "addCart":{
         return{
-            ...state,cartSuccess:true
+            ...state,statusSuccess:true,item:action.item
         }
     }       
     case "addCartClose":{
+        
         return{
-            ...state,cartSuccess:false
+            ...state,statusSuccess:false,
         }
     }     
     default:

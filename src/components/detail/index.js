@@ -16,7 +16,8 @@ import { fetchDetail } from '../../actions/detailAction';
 import { actUpdateProductToCart } from './../../actions/CartAction';
 import { actAddToCart } from '../../actions/CartAction';
 import { NavLink } from 'react-router-dom';
-function Detail({ fetchDetail, item, match,addCartSuceess,actAddToCart,actAddToCartMuaNgay }) {
+import { history } from './../../reducers/history';
+function Detail({ fetchDetail, item, match,addCartSuceess,actAddToCart,actAddToCartMuaNgay ,addCartClose}) {
     const classes = useStyles();
     const [sateQuantity, setSateQuantity] = useState(1)
     console.log(item);
@@ -30,12 +31,20 @@ function Detail({ fetchDetail, item, match,addCartSuceess,actAddToCart,actAddToC
     }
    
     const onClickAddCartSuccess = (item,quantity) => {
-        addCartSuceess()
+        addCartSuceess(item)
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+        setTimeout(()=>addCartClose(),3000)
         actAddToCart(item,quantity)
     }
     const onClickAddCarts = (item) => {
-        actAddToCartMuaNgay(item)
+        if(localStorage.getItem('USER')){
+            actAddToCartMuaNgay(item)
+            return history.push("/cart");
+        }else{
+            actAddToCartMuaNgay(item)
+            return history.push("/login");
+        }
+       
     }
     return (
         item !== undefined &&
@@ -100,7 +109,7 @@ function Detail({ fetchDetail, item, match,addCartSuceess,actAddToCart,actAddToC
                             <Button variant="contained" color="" className={classes.btn_remove} onClick={() => onUpdateQuantity(item, sateQuantity - 1)}>-</Button>
                             <Typography variant="contained" className={classes.text_soluong}>{sateQuantity}</Typography>
                             <Button variant="contained" color="" className={classes.btn_add} onClick={() => onUpdateQuantity(item, sateQuantity + 1)}>+</Button>
-                            <NavLink to={'/cart'}  className={classes.btn_muangay}>   
+                            <Link className={classes.btn_muangay}>   
                                 <Button
                                     variant="contained"
                                     className={classes.buttonMuaNgay}
@@ -108,7 +117,7 @@ function Detail({ fetchDetail, item, match,addCartSuceess,actAddToCart,actAddToC
                                 >
                                     Mua ngay
                                 </Button>
-                            </NavLink>
+                            </Link>
                          
                             <Button
                                 variant="contained"
@@ -151,7 +160,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         fetchDetail: (id) => {
             dispatch(fetchDetail(id))
         },
-        addCartSuceess: () => dispatch({ type: "addCart" }),
+        addCartSuceess: (item) => dispatch({ type: "addCart",item }),
+        addCartClose: () => dispatch({ type: "addCartClose" }),
         actAddToCart: (payload,quantity) => {
             dispatch(actAddToCart(payload, quantity))
         },
