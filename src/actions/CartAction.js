@@ -53,3 +53,29 @@ export function fetchDataMaGG() {
       .catch((err) => console.log('err:', err))
   }
 }
+
+export function actThongTinUser() {
+  return {
+    type: types.STATUS_THONG_TIN_USER
+  }
+}
+export function actSubThongTinUser() {
+  return {
+    type: types.STATE_THONG_TIN_USER
+  }
+}
+export function actLichSuDonHang() {
+  return {
+    type: types.STATUS_LICHSUDONHANG
+  }
+}
+export function actLichSuGiaoDich() {
+  return {
+    type: types.STATUS_LICHSUGIAODICH
+  }
+}
+export function actSanPhamYeuThich() {
+  return {
+    type: types.STATUS_SAN_PHAM_YEU_THICH
+  }
+}

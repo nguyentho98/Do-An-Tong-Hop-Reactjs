@@ -33,9 +33,9 @@ const routes=[
         main: ({match}) => <DetailContainer match={match}/>
     },
     {
-        path:'/info/:stt',
+        path:'/info',
         exact:false,
-        main: ({match}) => <InfoUserContainer match={match}/>
+        main: () => <InfoUserContainer/>
     },
     {
         path:'/sreach',

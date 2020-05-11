@@ -33,8 +33,13 @@ const useStyles = makeStyles(theme => ({
     title_text:{
         marginLeft:'auto',
     },
-    title:{
+    title_naptien:{
         fontWeight:'bold',
+    },
+    title_thanhtoan:{
+        textAlign:'center',
+        fontWeight:'bold',
+        marginBottom:10
     },
     thanhtoan_container:{
         backgroundColor: '#fff',
@@ -156,6 +161,8 @@ const useStyles = makeStyles(theme => ({
             borderBottomLeftRadius: '5px',
             textAlign:'center',
             marginBottom:10,
+            color:'white',
+            cursor:'pointer'
         },
         btn_thanhtoan:{
             width: '87%',
@@ -168,16 +175,26 @@ const useStyles = makeStyles(theme => ({
             borderBottomLeftRadius: '5px',
             textAlign:'center',
             marginBottom:10,
+            color:'white',
+            cursor:'pointer'
         },
         btn_napthemtien_text:{
             textDecoration:'none',
             color:'white',
-            fontWeight:'bold'
+            fontWeight:'bold',
+            '&:hover':{
+                color:'white',
+                textDecoration:'none',
+            }
         },
         btn_thanhtoan_text:{
             textDecoration:'none',
             color:'white',
-            fontWeight:'bold'
+            fontWeight:'bold',
+            '&:hover':{
+                color:'white',
+                textDecoration:'none',
+            }
         },
         // btn_thanhtoan:{
         //     borderTopLeftRadius: '5px',

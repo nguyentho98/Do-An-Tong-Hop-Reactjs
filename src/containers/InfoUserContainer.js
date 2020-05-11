@@ -11,7 +11,7 @@ const InfoUserContainer= ({match}) =>{
         <Headers></Headers>
         <Alerts></Alerts>
         <BtnMenu></BtnMenu>
-        <InfoUser match={match}></InfoUser>
+        <InfoUser></InfoUser>
         <Footer></Footer>
       </div>
   );

@@ -2,8 +2,9 @@ import * as types from '../constants/ActionTypes';
 var data=JSON.parse(localStorage.getItem('CART'))
 const productInitialState = {
     dataCart: data ? data: [],
-    dataMaGG:[]
-
+    dataMaGG:[],
+    statusUser:0,
+    stateViewThongTinUser:false
 }
 const cartReducer = (state = productInitialState, action) => {
     var {quantity,product}=action;
@@ -47,7 +48,31 @@ const cartReducer = (state = productInitialState, action) => {
         case types.GETMAGG_FAILURE:
         return {
             ...state, 
-        }         
+        }   
+        case types.STATUS_THONG_TIN_USER:
+            return {
+                ...state, statusUser:0
+            }    
+        case types.STATUS_LICHSUDONHANG:
+            return {
+                ...state, statusUser:1
+            } 
+        case types.STATUS_LICHSUGIAODICH:
+            return {
+                ...state, statusUser:2
+            } 
+        case types.STATUS_SAN_PHAM_YEU_THICH:
+            return {
+                ...state, statusUser:3
+            }  
+        case types.STATE_THONG_TIN_USER:
+            return {
+                ...state, stateViewThongTinUser:true
+            }   
+        case "onClickItemUser":
+            return {
+                ...state, statusUser:action.value
+            }      
         default:
             return {...state}
     }

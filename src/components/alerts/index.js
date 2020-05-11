@@ -57,6 +57,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     addCartClose: () => {
       dispatch({ type: "addCartClose" })
     },
+    
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Alerts)

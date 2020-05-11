@@ -12,13 +12,15 @@ const useStyles = makeStyles(theme => ({
         flexDirection: 'row',
         marginTop:20,
         marginBottom:15,
+        alignItems: 'center'
     },
     inputLabel:{
         width: 180,
         maxWidth: '100%',
         fontWeight: 700,
         color:'black',
-        lineHeight: 1.5
+        lineHeight: 1.5,
+        marginBottom:0,
     },
     text_info_detail:{
         fontWeight: 'bold',
@@ -28,6 +30,35 @@ const useStyles = makeStyles(theme => ({
     text_info_detail_1:{
         marginLeft: '10px',
         fontStyle:'italic'
+    },
+    inputRoot:{
+        border: '1px solid #ddd',
+        borderRadius:3
+    },
+    inputInput:{
+        padding: '6px 15px 7px'
+    },
+    buttonXacNhan:{
+        backgroundColor: '#29b474',
+        color:'white',
+        textTransform: 'none',
+    },
+    buttonGuiLai:{
+        color:'29b474',
+        textTransform: 'none',
+        marginLeft:10
+    },
+    buttonContainerGuiLai:{
+        '&:hover':{
+            boxShadow: 'none',
+            backgroundColor: '#29b474',
+        }
+    },
+    buttonContainerXacNhan:{
+        '&:hover':{
+            boxShadow: 'none',
+            backgroundColor: '#29b474',
+        }
     }
 }));
 export default useStyles

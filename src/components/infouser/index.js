@@ -13,6 +13,8 @@ import LichSuDonHang from './lichsudonhang';
 import LichSuGiaoDich from './lichsugiaodich';
 import ThayDoiMatKhau from './thaydoimatkhau';
 import SanPhamYeuThich from './sanphamyeuthich';
+
+import { connect } from 'react-redux';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -42,14 +44,12 @@ function a11yProps(index) {
   };
 }
 
-
-export default function InfoUser({ match }) {
+ function InfoUser({user,statusUser,onClickItemUser}) {
   const classes = useStyles();
-
   const [value, setValue] = React.useState(0);
-  useEffect(() => {
-    setValue(parseInt(match.params.stt))
-  }, [])
+  // useEffect(() => {
+  //   setValue(statusUser)
+  // }, [])
   const Tab = withStyles({
     selected: {
       backgroundColor: 'white'
@@ -67,7 +67,7 @@ export default function InfoUser({ match }) {
     },
   })(TabsCustom);
   function handleChange(event, newValue) {
-    setValue(newValue);
+    onClickItemUser(newValue);
   }
 
   return (
@@ -82,31 +82,31 @@ export default function InfoUser({ match }) {
           </Grid>
           <Grid className={classes.account_name}>
             <Typography variant="body2" className={classes.account_name_text1}>Nguyễn Xuân Thọ</Typography>
-            <Typography variant="body2" className={classes.account_name_text2}>Số dư hiện tại : 0 </Typography>
+            <Typography variant="body2" className={classes.account_name_text2}>Số dư hiện tại : {user.Surplus}</Typography>
           </Grid>
         </Grid>
         <Grid className={classes.account_info}>
           <Grid className={classes.account_info_item}>
             UserName:
-                     <Typography variant="caption" className={classes.account_info_item_text} > Tuoithotranve98</Typography>
+        <Typography variant="caption" className={classes.account_info_item_text} > Tuoithotranve98</Typography>
           </Grid>
           <Grid className={classes.account_info_item}>
             Ngày đăng ký:
-                      <Typography variant="caption" className={classes.account_info_item_text}> 25/5/2020</Typography>
+          <Typography variant="caption" className={classes.account_info_item_text}> 25/5/2020</Typography>
           </Grid>
           <Grid className={classes.account_info_item}>
             <Typography variant="caption" className={classes.account_info_item_text}> Member</Typography>
           </Grid>
           <Grid className={classes.account_info_item}>
             Đã tích lũy:
-                     <Typography variant="caption" className={classes.account_info_item_text}> 200,440</Typography>
+            <Typography variant="caption" className={classes.account_info_item_text}> 200,440</Typography>
           </Grid>
         </Grid>
       </Grid>
       <div className={classes.content}>
         <Tabs
           orientation="vertical"
-          value={value}
+          value={statusUser}
           onChange={handleChange}
           aria-label="Vertical tabs example"
           className={classes.tabs}
@@ -179,22 +179,37 @@ export default function InfoUser({ match }) {
           } {...a11yProps(4)} />
 
         </Tabs>
-        <TabPanel value={value} index={0} className={classes.tabPanel}>
+        <TabPanel value={statusUser} index={0} className={classes.tabPanel}>
           <ThongTinTaiKhoan />
         </TabPanel>
-        <TabPanel value={value} index={1} className={classes.tabPanel}>
+        <TabPanel value={statusUser} index={1} className={classes.tabPanel}>
           <LichSuDonHang />
         </TabPanel>
-        <TabPanel value={value} index={2} className={classes.tabPanel}>
+        <TabPanel value={statusUser} index={2} className={classes.tabPanel}>
           <LichSuGiaoDich />
         </TabPanel>
-        <TabPanel value={value} index={3} className={classes.tabPanel}>
+        <TabPanel value={statusUser} index={3} className={classes.tabPanel}>
           <SanPhamYeuThich />
         </TabPanel>
-        <TabPanel value={value} index={4} className={classes.tabPanel}>
+        <TabPanel value={statusUser} index={4} className={classes.tabPanel}>
           <ThayDoiMatKhau />
         </TabPanel>
       </div>
     </Container>
   );
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    user: state.loginReducer.user,
+    statusUser: state.cartReducer.statusUser
+  }
+}
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    onClickItemUser: (value) => {
+      dispatch({type:"onClickItemUser",value})
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(InfoUser)

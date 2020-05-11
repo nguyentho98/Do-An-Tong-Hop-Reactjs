@@ -1,33 +1,52 @@
 import React, { useState ,useEffect} from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
-import { Grid, Typography, Avatar } from '@material-ui/core';
+import { Grid, Typography, Avatar ,Link} from '@material-ui/core';
 import { logout } from './../../actions/userAction';
+import { actThongTinUser,actLichSuDonHang,actLichSuGiaoDich,actSanPhamYeuThich } from './../../actions/CartAction';
 import iconaccount from '../../utils/images/iconaccount.png';
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import useStyles from './styles';
 import tien from '../../utils/images/tien.png';
 import { connect } from 'react-redux';
-const Example = ({ logout ,user}) => {
+import { history } from './../../reducers/history';
+const Example = ({ logout ,user,actThongTinUser,actLichSuDonHang,actLichSuGiaoDich,actSanPhamYeuThich}) => {
   const classes = useStyles();
   const [dropdownOpen, setDropdownOpen] = useState(false)
- console.log(user);
   const toggle = () => {
     setDropdownOpen(!dropdownOpen)
   }
-
   const onMouseEnter = () => {
     setDropdownOpen(true)
   }
-
   const onMouseLeave = () => {
     setDropdownOpen(false)
+  }
+  const onClickLogout = () => {
+    history.push("/login");
+    logout()
+  }
+  const onClickThongTinTaiKhoan  = () => {
+    actThongTinUser()
+    history.push("/info");
+  }
+  const onClickLinhSuDonHang  = () => {
+    actLichSuDonHang()
+    history.push("/info");
+  }
+  const onClickLichSuGiaoDich  = () => {
+    actLichSuGiaoDich()
+    history.push("/info");
+  }
+  const onClickSanPhamYeuThich  = () => {
+    actSanPhamYeuThich()
+    history.push("/info");
   }
   return (
     <Dropdown className="d-inline-block" onMouseOver={onMouseEnter} onMouseLeave={onMouseLeave} isOpen={dropdownOpen} toggle={toggle}>
       <DropdownToggle className={classes.btnuser}>
         <Grid className={classes.user}>
           <Avatar src={iconaccount} className={classes.imguser} alt="xin chào"></Avatar>
-          <Typography variant="body1">Admin</Typography>
+  <Typography variant="body1">{user.username}</Typography>
         </Grid>
       </DropdownToggle>
       <DropdownMenu className={classes.dropdownMenuUser}>
@@ -36,40 +55,33 @@ const Example = ({ logout ,user}) => {
           <Grid style={{fontWeight:'bold',display:'flex',marginTop:10,marginLeft:6,marginBottom:15,alignItems:'center'}}>
             Số dư: {user?.Surplus}
             <Avatar src={tien} alt="xin chào" style={{borderRadius:0,width:25,height:25,marginBottom:5}}></Avatar>
-            <Link to="/phuongthucthanhtoan" className={classes.btnnaptien}>Nạp Tiền</Link>
+            <NavLink to="/phuongthucthanhtoan" className={classes.btnnaptien}>Nạp Tiền</NavLink>
           </Grid>
         </Grid>
-        <DropdownItem divider  style={{margin:0}} />
-        
-        <Link to="/info/1" className={classes.linkItem}>
-          <DropdownItem className={classes.dropdownItemUser}>
-            Lịch sử mua hàng
-          </DropdownItem>
-        </Link>
-        <DropdownItem divider style={{margin:0}}/>
-        <Link to="/info/0"  className={classes.linkItem}>
-          <DropdownItem className={classes.dropdownItemUser}>
+          <DropdownItem divider style={{margin:0}}/>
+          <DropdownItem className={classes.dropdownItemUser} onClick={() =>onClickThongTinTaiKhoan() } >
             Thông tin tài khoản
           </DropdownItem>
-        </Link>
-        <DropdownItem divider  style={{margin:0}} />
-        <Link to="/info/2"  className={classes.linkItem}>
-          <DropdownItem className={classes.dropdownItemUser}>
+
+          <DropdownItem divider  style={{margin:0}} />
+          <DropdownItem className={classes.dropdownItemUser} onClick={() =>onClickLinhSuDonHang() }  >
+            Lịch sử đơn hàng
+          </DropdownItem>
+
+          <DropdownItem divider  style={{margin:0}}/>
+          <DropdownItem className={classes.dropdownItemUser} onClick={() =>onClickLichSuGiaoDich() }>
+            Lịch sử giao dịch
+          </DropdownItem>
+
+          <DropdownItem divider  style={{margin:0}} />
+          <DropdownItem className={classes.dropdownItemUser} onClick={() =>onClickSanPhamYeuThich() }>
             Sản phẩm yêu thích
           </DropdownItem>
-        </Link>
-        <DropdownItem divider  style={{margin:0}}/>
-        <Link to="/"  className={classes.linkItem}>
-          <DropdownItem className={classes.dropdownItemUser}>
-            Liên hệ Fanpage
+
+          <DropdownItem divider  style={{margin:0}}/>
+          <DropdownItem  className={classes.dropdownItemUser} onClick={() =>onClickLogout() }>
+            Đăng xuất 
           </DropdownItem>
-        </Link>
-        <DropdownItem divider  style={{margin:0}}/>
-        <DropdownItem onClick={() => logout()} className={classes.dropdownItemUser}>
-          <Link to="/login"  className={classes.linkItem}>
-            Đăng xuất
-            </Link>
-        </DropdownItem>
       </DropdownMenu>
     </Dropdown>
   );
@@ -83,6 +95,18 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     logout: () => {
       dispatch(logout())
+    },
+    actLichSuDonHang: () => {
+      dispatch(actLichSuDonHang())
+    },
+    actThongTinUser: () => {
+      dispatch(actThongTinUser())
+    },
+    actLichSuGiaoDich: () => {
+      dispatch(actLichSuGiaoDich())
+    },
+    actSanPhamYeuThich: () => {
+      dispatch(actSanPhamYeuThich())
     }
   }
 }
