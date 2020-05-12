@@ -1,4 +1,5 @@
 import * as types from '../constants/ActionTypes';
+import axios from 'axios';
 export function actAddToCart(product,quantity) {
   return {
     type: types.ADD_TO_CART,
@@ -77,5 +78,29 @@ export function actLichSuGiaoDich() {
 export function actSanPhamYeuThich() {
   return {
     type: types.STATUS_SAN_PHAM_YEU_THICH
+  }
+}
+
+export function fetchSendEmailUser() {
+  return {
+    type: types.SEND_EMAIL_USER
+  }
+}
+export function actSendEmailUser() {
+  return (dispatch) => {
+    
+    axios
+    .post(`http://localhost:1337/auth/send-email-confirmation`, {
+      email: 'nxtho0109@gmail.com',
+    })
+    .then(response => {
+      // Handle success.
+      dispatch(fetchSendEmailUser())
+      console.log('Your user received an email');
+    })
+    .catch(error => {
+      // Handle error.
+      console.err('An error occured:');
+    });
   }
 }

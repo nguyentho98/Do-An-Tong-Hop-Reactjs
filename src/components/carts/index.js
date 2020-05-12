@@ -5,10 +5,10 @@ import InputBase from '@material-ui/core/InputBase';
 import useStyles from './styles';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
-import { actRemoveProductToCart,actUpdateProductToCart,fetchDataMaGG,actSubThongTinUser,actThongTinUser } from '../../actions/CartAction';
+import { actRemoveProductToCart,actUpdateProductToCart,fetchDataMaGG,actSubThongTinUser,actThongTinUser ,actSendEmailUser} from '../../actions/CartAction';
 import { connect } from 'react-redux';
 import { history } from './../../reducers/history';
-function Carts({ dataCart, actRemoveProductToCart, actUpdateProductToCart,actFetchDataMaGG ,dataMaGG,user,actSubThongTinUser,actThongTinUser}) {
+function Carts({ dataCart, actRemoveProductToCart, actUpdateProductToCart,actFetchDataMaGG ,dataMaGG,user,actSubThongTinUser,actThongTinUser,}) {
     const classes = useStyles();
     const [sateQuantity, setSateQuantity] = useState(1) // số lượng sản phẩm
     const [sateMagGiamGia, setSateMagGiamGia] = useState(0) // 0 là ko hiện gì, 1 là có mã giảm giá , 2 là mã giảm giá ko tồn tại
@@ -139,6 +139,7 @@ function Carts({ dataCart, actRemoveProductToCart, actUpdateProductToCart,actFet
         return sotiencannap;
     }
     const onClickThanhToan  = () => {
+        actSendEmailUser()
         actSubThongTinUser()
         actThongTinUser()
         history.push("/info");
@@ -281,6 +282,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         actThongTinUser:() => {
             dispatch(actThongTinUser())
+        },
+        actSendEmailUser:() => {
+            dispatch(actSendEmailUser())
         },
         
     }

@@ -45,3 +45,6 @@ export const  STATUS_LICHSUGIAODICH= 'STATUS_LICHSUGIAODICH'
 export const  STATUS_LICHSUDONHANG= 'STATUS_LICHSUDONHANG'
 //State trạng thái view Thông tin User
 export const  STATE_THONG_TIN_USER = 'STATE_THONG_TIN_USER'
+
+//Gửi mail xác nhận
+export const  SEND_EMAIL_USER = 'SEND_EMAIL_USER'
