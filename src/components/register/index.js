@@ -3,7 +3,7 @@ import { Grid, Typography, Button } from '@material-ui/core';
 import useStyles from './styles';
 import { Link } from "react-router-dom";
 import { clear } from './../../actions/alertAction';
-import { register } from './../../actions/userAction';
+import { register } from './../../actions/registerAction';
 import { connect } from 'react-redux';
 import { history } from './../../reducers/history';
 

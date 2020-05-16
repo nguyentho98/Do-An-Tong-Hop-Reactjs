@@ -3,7 +3,7 @@ import { Grid, Typography, Button } from '@material-ui/core';
 import useStyles from './styles';
 import { Link } from "react-router-dom";
 import { clear } from './../../actions/alertAction';
-import { login } from './../../actions/userAction';
+import { login } from './../../actions/loginAction';
 import { connect } from 'react-redux';
 import { history } from './../../reducers/history';
 function Login({ clearAlerts, login, alert }) {

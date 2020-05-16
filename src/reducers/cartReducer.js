@@ -69,10 +69,6 @@ const cartReducer = (state = productInitialState, action) => {
             return {
                 ...state, stateViewThongTinUser:true
             } 
-        case types.SEND_EMAIL_USER:
-            return {
-                ...state,
-            }   
         case "onClickItemUser":
             return {
                 ...state, statusUser:action.value

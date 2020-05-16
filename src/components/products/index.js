@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import { Grid, Container, Link } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -7,18 +7,21 @@ import Typography from '@material-ui/core/Typography';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import useStyles from './styles';
 import {  NavLink ,Redirect} from "react-router-dom";
-import { fetchDataProduct } from '../../actions/ProductAction';
-import { actAddToCart } from '../../actions/CartAction';
+import { getLimitDataProduct ,actProductLimit,getAllDataProduct} from '../../actions/productAction';
+import { actAddToCart } from '../../actions/cartAction';
 import { connect } from 'react-redux'
 import { history } from './../../reducers/history';
 
-function Products({ appDataDT, fetchDataProduct, addCartSuceess, actAddToCart ,addCartClose}) {
-    const classes = useStyles();
-    
-    useEffect(() => {
-        fetchDataProduct()
-    }, [])
 
+function Products({ limitDataProduct,viewLoadMore,loadMore,getAllDataProduct, getLimitDataProduct, addCartSuceess, actAddToCart ,addCartClose,limit,actProductLimit,allDataProduct}) {
+    const classes = useStyles();
+    const obj = Object.keys(allDataProduct).length;
+        useEffect(() => {
+            getLimitDataProduct(limit)
+            getAllDataProduct()
+        }, [limit])
+
+    
     const onClickAddCartSuccess = (item) => {
         addCartSuceess(item)
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
@@ -34,8 +37,18 @@ function Products({ appDataDT, fetchDataProduct, addCartSuceess, actAddToCart ,a
             return history.push("/login");
         }
     }
+    const onClickGetProductLimit  = () => {
+        actProductLimit()
+        actloadMore()
+    }
+    const actloadMore  = () => {
+        if(limit > obj){
+            viewLoadMore()
+        }
+    }
+    
     const ViewProducts = () =>
-        appDataDT.map((items, key) => (
+        limitDataProduct.map((items, key) => (
            
             <Grid md={3} item key={key}>
                 
@@ -62,7 +75,7 @@ function Products({ appDataDT, fetchDataProduct, addCartSuceess, actAddToCart ,a
                     </Grid>
                         <Grid className={classes.grid_cart}>
                             <ShoppingCartIcon onClick={(a) => onClickAddCartSuccess(items)} className={classes.btn_iconcart} />
-                            <Link  className={classes.btn_cart} onClick={() => onClickAddCarts(items)} >
+                            <Link href=""  className={classes.btn_cart} onClick={() => onClickAddCarts(items)} >
                                 Mua ngay
                             </Link>
                         </Grid>
@@ -79,10 +92,10 @@ function Products({ appDataDT, fetchDataProduct, addCartSuceess, actAddToCart ,a
                 </Grid>
                 <Grid container spacing={3}>
                     <ViewProducts></ViewProducts>
-                </Grid>
-                <Grid className={classes.text_load_sp}>
-                    Tải thêm sản phẩm
-                </Grid>
+                </Grid>        
+                { <Grid className={classes.text_load_sp} onClick={()=>onClickGetProductLimit()}>
+                 Tải thêm sản phẩm
+                </Grid>}
                 <hr className={classes.duongke}></hr>
             </Container>
         </Grid>
@@ -91,15 +104,21 @@ function Products({ appDataDT, fetchDataProduct, addCartSuceess, actAddToCart ,a
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        appDataDT: state.productReducer.dataProduct,
+        limitDataProduct: state.productReducer.limitDataProduct,
+        allDataProduct: state.productReducer.allDataProduct,
         cartSuccess: state.productReducer.cartSuccess,
+        limit: state.productReducer.limit,
+        loadMore: state.productReducer.loadMore,
     }
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        fetchDataProduct: () => dispatch(fetchDataProduct()),
+        getLimitDataProduct: (limit) => dispatch(getLimitDataProduct(limit)),
+        getAllDataProduct: () => dispatch(getAllDataProduct()),
+        actProductLimit: () => dispatch(actProductLimit()),
         addCartSuceess: (item) => dispatch({ type: "addCart",item }),
         addCartClose: () => dispatch({ type: "addCartClose" }),
+        viewLoadMore: () => dispatch({ type: "viewLoadMore" }),
         actAddToCart: (payload) => {
             dispatch(actAddToCart(payload, 1))
         },

@@ -15,10 +15,17 @@ const MuiTheme = createMuiTheme({
 
             },
             maxWidthMd:{
-                maxWidth:980
+                maxWidth:'1000px !important'
             }
+        },
+       
+        MuiOutlinedInput: {
+            input: {
+                padding:'11px 14px'
+            },
         }
-    }   
+    }
+         
 });
 
 export default MuiTheme;

@@ -1,17 +1,24 @@
 import React, { useState ,useEffect} from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { Grid, Typography, Avatar ,Link} from '@material-ui/core';
-import { logout } from './../../actions/userAction';
-import { actThongTinUser,actLichSuDonHang,actLichSuGiaoDich,actSanPhamYeuThich } from './../../actions/CartAction';
+import { logout } from './../../actions/loginAction';
+import { actThongTinUser,actLichSuDonHang,actLichSuGiaoDich,actSanPhamYeuThich } from '../../actions/cartAction';
 import iconaccount from '../../utils/images/iconaccount.png';
 import { NavLink } from "react-router-dom";
 import useStyles from './styles';
 import tien from '../../utils/images/tien.png';
 import { connect } from 'react-redux';
 import { history } from './../../reducers/history';
+import { cleanup } from '@testing-library/react';
 const Example = ({ logout ,user,actThongTinUser,actLichSuDonHang,actLichSuGiaoDich,actSanPhamYeuThich}) => {
   const classes = useStyles();
   const [dropdownOpen, setDropdownOpen] = useState(false)
+//   useEffect(() => {
+//     return () => {
+//         console.log("xin chao");
+//         cleanup()
+//     };
+// },[]);
   const toggle = () => {
     setDropdownOpen(!dropdownOpen)
   }
@@ -46,7 +53,7 @@ const Example = ({ logout ,user,actThongTinUser,actLichSuDonHang,actLichSuGiaoDi
       <DropdownToggle className={classes.btnuser}>
         <Grid className={classes.user}>
           <Avatar src={iconaccount} className={classes.imguser} alt="xin chào"></Avatar>
-  <Typography variant="body1">{user.username}</Typography>
+        <Typography variant="body1">{user.username}</Typography>
         </Grid>
       </DropdownToggle>
       <DropdownMenu className={classes.dropdownMenuUser}>

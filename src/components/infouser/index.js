@@ -180,7 +180,7 @@ function a11yProps(index) {
 
         </Tabs>
         <TabPanel value={statusUser} index={0} className={classes.tabPanel}>
-          <ThongTinTaiKhoan />
+          <ThongTinTaiKhoan user={user}/>
         </TabPanel>
         <TabPanel value={statusUser} index={1} className={classes.tabPanel}>
           <LichSuDonHang />

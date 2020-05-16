@@ -1,13 +1,21 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { Grid, InputLabel, Input, Typography, Button } from '@material-ui/core';
 import useStyles from './styles';
 import FormGroup  from '@material-ui/core/FormGroup';
-import { connect } from 'react-redux';
+
 import InputBase from '@material-ui/core/InputBase';
-function ThongTinTaiKhoan({stateViewThongTinUser}) {
+import { connect } from 'react-redux';
+import { setViewEditUser } from './../../../actions/userAction';
+function ThongTinTaiKhoan({stateViewThongTinUser,setViewEditUser,viewEditUser,test}) {
     const classes = useStyles();
     // const [state,setState]=React.useState(true)
+    useEffect (()=>{
+        return () => { console.log("componentWillUnmount")}
+    },[])
     const View  = () => {
+        const onClickEdit  = () => {
+            setViewEditUser()        
+        }
         if(!stateViewThongTinUser){
             return(
                 <Grid className={classes.root}>
@@ -15,39 +23,147 @@ function ThongTinTaiKhoan({stateViewThongTinUser}) {
                     <hr style={{ margin: '10px auto', borderTop: '1px solid #eee' }}></hr>
                     <FormGroup className={classes.formGroup}>
                         <InputLabel className={classes.inputLabel} htmlFor="my-input">Email address: </InputLabel> 
-                        <Grid  className={classes.text_info_detail} >nxtho0109@gmail.com</Grid>
-                        <Typography variant="caption">
+                            {viewEditUser ? <Grid  className={classes.text_info_detail} >nxtho0109@gmail.com</Grid> 
+                            : 
+                            <Grid>
+                                <InputBase
+                                    placeholder=""
+                                    classes={{
+                                        root: classes.inputRoot,
+                                        input: classes.inputInput,
+                                        
+                                    }}
+                                    inputProps={{ 'aria-label': 'search' } }
+                                />
+                            </Grid>
+                            }
+                         <Typography variant="caption" onClick={()=>onClickEdit()}>
                             <i className="fas fa-edit"></i>
                             Cập nhật
-                        </Typography>
+                        </Typography> 
                     </FormGroup >
                     <FormGroup className={classes.formGroup}>
                         <InputLabel className={classes.inputLabel} htmlFor="my-input">Username: </InputLabel> 
-                        <Grid  className={classes.text_info_detail} >Tuoithotranve98</Grid>
+                        
+                        {viewEditUser ? <Grid  className={classes.text_info_detail} >Tuoithotranve98</Grid>
+                            : 
+                            <Grid>
+                                <InputBase
+                                    placeholder=""
+                                    classes={{
+                                        root: classes.inputRoot,
+                                        input: classes.inputInput,
+                                        
+                                    }}
+                                    inputProps={{ 'aria-label': 'search' } }
+                                />
+                            </Grid>
+                            }
                     </FormGroup >
                     <FormGroup className={classes.formGroup}>
                         <InputLabel className={classes.inputLabel} htmlFor="my-input">Họ và tên: </InputLabel> 
-                        <Grid  className={classes.text_info_detail} >Thọ Nguyễn Xuân</Grid>
+                        
+                        {viewEditUser ? <Grid  className={classes.text_info_detail} >Thọ Nguyễn Xuân</Grid>
+                            : 
+                            <Grid>
+                                <InputBase
+                                    placeholder=""
+                                    classes={{
+                                        root: classes.inputRoot,
+                                        input: classes.inputInput,
+                                        
+                                    }}
+                                    inputProps={{ 'aria-label': 'search' } }
+                                />
+                            </Grid>
+                            }
                     </FormGroup >
                     <FormGroup className={classes.formGroup}>
                         <InputLabel className={classes.inputLabel} htmlFor="my-input">Số điện thoại: </InputLabel> 
-                        <Grid  className={classes.text_info_detail_1} >(Chưa có thông tin)</Grid>
+                        
+                        {viewEditUser ? <Grid  className={classes.text_info_detail_1} >(Chưa có thông tin)</Grid>
+                            : 
+                            <Grid>
+                                <InputBase
+                                    placeholder=""
+                                    classes={{
+                                        root: classes.inputRoot,
+                                        input: classes.inputInput,
+                                        
+                                    }}
+                                    inputProps={{ 'aria-label': 'search' } }
+                                />
+                            </Grid>
+                        }
                     </FormGroup >
                     <FormGroup className={classes.formGroup}>
                         <InputLabel className={classes.inputLabel} htmlFor="my-input">Số chứng minh nhân dân: </InputLabel> 
-                        <Grid  className={classes.text_info_detail_1} >(Chưa có thông tin)</Grid>
+                        {viewEditUser ? <Grid  className={classes.text_info_detail_1} >(Chưa có thông tin)</Grid>
+                            : 
+                            <Grid>
+                                <InputBase
+                                    placeholder=""
+                                    classes={{
+                                        root: classes.inputRoot,
+                                        input: classes.inputInput,
+                                        
+                                    }}
+                                    inputProps={{ 'aria-label': 'search' } }
+                                />
+                            </Grid>
+                            }
+                        
                     </FormGroup >
                     <FormGroup className={classes.formGroup}>
                         <InputLabel className={classes.inputLabel} htmlFor="my-input">Giới tính:</InputLabel> 
-                        <Grid  className={classes.text_info_detail_1} >(Chưa có thông tin)</Grid>
+                        {viewEditUser ? <Grid  className={classes.text_info_detail_1} >(Chưa có thông tin)</Grid>
+                            : 
+                            <Grid>
+                                <InputBase
+                                    placeholder=""
+                                    classes={{
+                                        root: classes.inputRoot,
+                                        input: classes.inputInput,
+                                        
+                                    }}
+                                    inputProps={{ 'aria-label': 'search' } }
+                                />
+                            </Grid>
+                            }
                     </FormGroup >
                     <FormGroup className={classes.formGroup}>
                         <InputLabel className={classes.inputLabel} htmlFor="my-input">Địa chỉ:</InputLabel> 
-                        <Grid  className={classes.text_info_detail_1} >(Chưa có thông tin)</Grid>
+                        {viewEditUser ? <Grid  className={classes.text_info_detail_1} >(Chưa có thông tin)</Grid>
+                            : 
+                            <Grid>
+                                <InputBase
+                                    placeholder=""
+                                    classes={{
+                                        root: classes.inputRoot,
+                                        input: classes.inputInput,
+                                        
+                                    }}
+                                    inputProps={{ 'aria-label': 'search' } }
+                                />
+                            </Grid>
+                            }
                     </FormGroup >
                     <FormGroup className={classes.formGroup}>
                         <InputLabel className={classes.inputLabel} htmlFor="my-input">Nghề nghiệp:</InputLabel> 
-                        <Grid  className={classes.text_info_detail_1} >(Chưa có thông tin)</Grid>
+                        {viewEditUser ? <Grid  className={classes.text_info_detail_1} >(Chưa có thông tin)</Grid>
+                            : 
+                            <Grid>
+                                <InputBase
+                                    placeholder=""
+                                    classes={{
+                                        root: classes.inputRoot,
+                                        input: classes.inputInput,
+                                        
+                                    }}
+                                    inputProps={{ 'aria-label': 'search' } }
+                                />
+                            </Grid>
+                            }
                     </FormGroup >
                 </Grid>
             )
@@ -99,11 +215,21 @@ function ThongTinTaiKhoan({stateViewThongTinUser}) {
     }
     return (
        <View></View>
+
     )
 }
+
 const mapStateToProps = (state, ownProps) => {
     return {
-        stateViewThongTinUser: state.cartReducer.stateViewThongTinUser
+        stateViewThongTinUser: state.cartReducer.stateViewThongTinUser,
+        viewEditUser: state.userReducer.viewEditUser
     }
 }
-export default connect(mapStateToProps, null)(ThongTinTaiKhoan)
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        setViewEditUser: () => {
+            dispatch(setViewEditUser())
+        },
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ThongTinTaiKhoan)

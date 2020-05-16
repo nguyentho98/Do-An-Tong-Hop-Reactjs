@@ -5,12 +5,13 @@ const useStyles = makeStyles(theme => ({
         marginTop:5,
     },
     duongke:{
-        marginTop: '20px',
+        marginTop: '10px',
         marginBottom: '20px',
         border: '0px',
         borderTop: '1px solid #eee',
     },
     list_title:{
+        marginTop:10,
         display:'flex',
         alignItems: 'center',
     },
@@ -235,6 +236,9 @@ const useStyles = makeStyles(theme => ({
         text_delete:{
             paddingLeft:10,
             color:'red',
+            cursor:'pointer',
+            textTransform: 'none',
+            fontSize: '14px',
         },
         text_price:{
             fontSize:16,

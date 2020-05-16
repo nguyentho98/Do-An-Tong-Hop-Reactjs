@@ -1,5 +1,5 @@
-import React from 'react'
-import { Container, Grid, Typography,Avatar } from '@material-ui/core';
+import React, { useState ,useEffect} from 'react'
+import { Container, Grid, Typography, Avatar } from '@material-ui/core';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import useStyles from './styles';
@@ -8,10 +8,9 @@ import DropDownCart from './dropdowncart';
 import nuce from '../../utils/images/nuce.png';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
-function Headers({stateLogin,loggedIn,stateUser}) {
-    
-    const classes = useStyles();
 
+function Headers({ stateLogin, loggedIn, stateUser }) {
+    const classes = useStyles();
 
     const UserLogin = () => {
         if (loggedIn) {
@@ -40,19 +39,21 @@ function Headers({stateLogin,loggedIn,stateUser}) {
             <Grid className={classes.top_header}>
                 <Container maxWidth="md" className={classes.container_top_header}>
                     <Grid className={classes.slide_new}>
-                    <div className={classes.animatedItem}>
-                        <div className={classes.sub_marquee}>
-                            <span className={classes.marquee_text}>Xin chào bạn đã đến với NuceShop </span>
-                            <span className={classes.marquee_text}>Xin chào bạn đã đến với NuceShop </span>
+                        <div className={classes.animatedItem}>
+                            <div className={classes.sub_marquee}>
+                                <span className={classes.marquee_text}>Xin chào bạn đã đến với NuceShop </span>
+                                <span className={classes.marquee_text}>Xin chào bạn đã đến với NuceShop </span>
+                            </div>
                         </div>
-                    </div>
                     </Grid>
+                   
                     <Grid className={classes.text_right}>
-                        <Link to="/test" className={classes.linkhotro}>
+                        <Link to="/test" className={classes.linkhotro} >
                             Hộ trợ 0357 004 230
                         </Link>
 
                     </Grid>
+
                     <Grid className={classes.clear}></Grid>
                 </Container>
             </Grid>

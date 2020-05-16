@@ -13,8 +13,8 @@ import { Carousel } from 'react-responsive-carousel';
 import NumberFormat from 'react-number-format';
 import { connect } from 'react-redux';
 import { fetchDetail } from '../../actions/detailAction';
-import { actUpdateProductToCart } from './../../actions/CartAction';
-import { actAddToCart } from '../../actions/CartAction';
+import { actUpdateProductToCart } from './../../actions/cartAction';
+import { actAddToCart } from '../../actions/cartAction';
 import { NavLink } from 'react-router-dom';
 import { history } from './../../reducers/history';
 function Detail({ fetchDetail, item, match,addCartSuceess,actAddToCart,actAddToCartMuaNgay ,addCartClose}) {

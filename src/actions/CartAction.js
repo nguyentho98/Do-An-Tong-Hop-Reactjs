@@ -81,26 +81,3 @@ export function actSanPhamYeuThich() {
   }
 }
 
-export function fetchSendEmailUser() {
-  return {
-    type: types.SEND_EMAIL_USER
-  }
-}
-export function actSendEmailUser() {
-  return (dispatch) => {
-    
-    axios
-    .post(`http://localhost:1337/auth/send-email-confirmation`, {
-      email: 'nxtho0109@gmail.com',
-    })
-    .then(response => {
-      // Handle success.
-      dispatch(fetchSendEmailUser())
-      console.log('Your user received an email');
-    })
-    .catch(error => {
-      // Handle error.
-      console.err('An error occured:');
-    });
-  }
-}

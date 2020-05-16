@@ -101,7 +101,7 @@ export default function HomePage() {
                 </Grid>
                 <Grid className={classes.menu_right} container>
                     <Grid container className={classes.btn}>
-                        <NavLink to={""} className={classes.btn_menu}>
+                        <NavLink to={"/sreach"} className={classes.btn_menu}>
                             <i className="fab fa-hotjar"></i>
                             <Typography variant="body1" className={classes.bar_btn_text}>Mua nhiều trong 24h</Typography>
                         </NavLink>

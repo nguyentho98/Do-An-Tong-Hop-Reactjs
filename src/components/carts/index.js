@@ -5,10 +5,10 @@ import InputBase from '@material-ui/core/InputBase';
 import useStyles from './styles';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
-import { actRemoveProductToCart,actUpdateProductToCart,fetchDataMaGG,actSubThongTinUser,actThongTinUser ,actSendEmailUser} from '../../actions/CartAction';
+import { actRemoveProductToCart,actUpdateProductToCart,fetchDataMaGG,actSubThongTinUser,actThongTinUser } from '../../actions/cartAction';
 import { connect } from 'react-redux';
 import { history } from './../../reducers/history';
-function Carts({ dataCart, actRemoveProductToCart, actUpdateProductToCart,actFetchDataMaGG ,dataMaGG,user,actSubThongTinUser,actThongTinUser,}) {
+function Carts({ dataCart, actRemoveProductToCart, actUpdateProductToCart,actFetchDataMaGG ,dataMaGG,user,actSubThongTinUser,}) {
     const classes = useStyles();
     const [sateQuantity, setSateQuantity] = useState(1) // số lượng sản phẩm
     const [sateMagGiamGia, setSateMagGiamGia] = useState(0) // 0 là ko hiện gì, 1 là có mã giảm giá , 2 là mã giảm giá ko tồn tại
@@ -35,7 +35,7 @@ function Carts({ dataCart, actRemoveProductToCart, actUpdateProductToCart,actFet
                         <Grid md={5}>
                             <Typography component="h3" variant="h5" className={classes.text_name}>{item.product.ProName}</Typography>
                             <Typography className={classes.text_stats}>Tình trạng: <span className={classes.text_stats_sub_01}>Còn hàng</span></Typography>
-                            <Typography className={classes.text_delete} onClick={() => onDelete(item.product)}>Xoá</Typography>
+                            <Typography className={classes.text_delete} onClick={() => onDelete(item.product)} variant="overline">Xoá</Typography>
                         </Grid>
                         <Grid md={2}>
                             <Typography className={classes.text_price}>{item.product.ProPrice}</Typography>
@@ -139,7 +139,6 @@ function Carts({ dataCart, actRemoveProductToCart, actUpdateProductToCart,actFet
         return sotiencannap;
     }
     const onClickThanhToan  = () => {
-        actSendEmailUser()
         actSubThongTinUser()
         actThongTinUser()
         history.push("/info");
@@ -182,9 +181,9 @@ function Carts({ dataCart, actRemoveProductToCart, actUpdateProductToCart,actFet
                 <Grid className={classes.list_title}>
                     <Typography component="h3" variant="h5" className={classes.title}>Giỏ Hàng </Typography>
                     <span style={{ fontSize: 13, marginLeft: 5 }}> (2 sản phẩm) </span>
-                    <Link to="/" className={classes.btn_title_text}>
+                    <NavLink to="/" className={classes.btn_title_text}>
                         Tiếp tục mua hàng
-                    </Link>
+                    </NavLink>
                 </Grid>
                 <hr className={classes.duongke}></hr>
                 <Grid className={classes.thanhtoan_container}>
@@ -282,9 +281,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         actThongTinUser:() => {
             dispatch(actThongTinUser())
-        },
-        actSendEmailUser:() => {
-            dispatch(actSendEmailUser())
         },
         
     }

@@ -40,7 +40,7 @@ const routes=[
     {
         path:'/sreach',
         exact:false,
-        main: () => <SreachContainer />
+        main: ({match}) => <SreachContainer match={match}/>
     },
     {
         path:'/cart',

@@ -15,6 +15,9 @@ import thanhtoan7 from '../../utils/images/thanhtoan7.png'
 import thanhtoan8 from '../../utils/images/thanhtoan8.png'
 import thanhtoan9 from '../../utils/images/thanhtoan9.png'
 import thanhtoan10 from '../../utils/images/thanhtoan10.png'
+import ViewNapGarena from './viewnapgarena/ViewNapGarena';
+import ViewNapLKNganHang from './viewnaplknganhang/ViewNapLKNganHang';
+import ViewNapViettel from './viewnapviettel/ViewNapViettel';
 function PhuongThucThanhToan() {
     const ExpansionPanel = withStyles({
         root: {
@@ -77,24 +80,20 @@ function PhuongThucThanhToan() {
                 <Grid className={classes.body_container}>
                     <Typography variant="overline" component="" className={classes.title}>NẠP DCOIN VÀO TÀI KHOẢN</Typography>
                     <hr style={{ margin: '10px auto', borderTop: '1px solid #eee' }}></hr>
-                    <Typography className={classes.phuongthucnaptien} >Phương thức nạp tiền: 1  <i className="icon-coin-dollar" style={{ color: '#000' }}></i> = 1 VNĐ</Typography>
+                    <Typography className={classes.phuongthucnaptien} >Phương thức nạp tiền: 1 Ncoin = 1 VNĐ</Typography>
                     <Grid  className={classes.content} >
                         <ExpansionPanel square expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
                             <ExpansionPanelSummary aria-controls="panel1d-content" id="panel1d-header">
                                 <Grid className={classes.body_content} >
                                     <Avatar src={thanhtoan1} alt="xin chao"className={classes.body_content_img} ></Avatar>
                                     <Grid>
-                                        <Typography className={classes.body_content_text1} >Nạp thẻ Garena ( Cần nạp 0 VNĐ)</Typography>
+                                        <Typography className={classes.body_content_text1} >Nạp thẻ Garena</Typography>
                                         <Typography className={classes.body_content_text2} >Nạp Dcoin bằng thẻ cào Garena</Typography>
                                     </Grid>
                                 </Grid>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
-                                <Typography>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                    sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing
-                                    elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                </Typography>
+                               <ViewNapGarena></ViewNapGarena>
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
                         <ExpansionPanel square expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
@@ -107,12 +106,22 @@ function PhuongThucThanhToan() {
                                     </Grid>
                                 </Grid>
                             </ExpansionPanelSummary>
-                            <ExpansionPanelDetails>
-                                <Typography>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                    sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing
-                                    elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                </Typography>
+                            <ExpansionPanelDetails >
+                               <ViewNapViettel></ViewNapViettel>
+                            </ExpansionPanelDetails>
+                        </ExpansionPanel>
+                        <ExpansionPanel square expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
+                            <ExpansionPanelSummary aria-controls="panel3d-content" id="panel3d-header">
+                                <Grid className={classes.body_content} >
+                                    <Avatar src={thanhtoan4} alt="xin chao"className={classes.body_content_img} ></Avatar>
+                                    <Grid>
+                                        <Typography className={classes.body_content_text1} >Chuyển Khoản Vietcombank, Vietinbank</Typography>
+                                        <Typography className={classes.body_content_text2} >Chuyển khoản ngân hàng online hoặc tại quầy giao dịch</Typography>
+                                    </Grid>
+                                </Grid>
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails >
+                               <ViewNapLKNganHang></ViewNapLKNganHang>
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
                         <ExpansionPanel square expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
@@ -127,30 +136,11 @@ function PhuongThucThanhToan() {
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
                                 <Typography>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                    sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing
-                                    elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
+                                Hi Shop thiếu nhân lực nên chưa nâng cấp chức năng này. hẹn bạn vào ngày gần nhất!!!
                                 </Typography>
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
-                        <ExpansionPanel square expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
-                            <ExpansionPanelSummary aria-controls="panel3d-content" id="panel3d-header">
-                                <Grid className={classes.body_content} >
-                                    <Avatar src={thanhtoan4} alt="xin chao"className={classes.body_content_img} ></Avatar>
-                                    <Grid>
-                                        <Typography className={classes.body_content_text1} >Chuyển Khoản Vietcombank, Vietinbank</Typography>
-                                        <Typography className={classes.body_content_text2} >Chuyển khoản ngân hàng online hoặc tại quầy giao dịch</Typography>
-                                    </Grid>
-                                </Grid>
-                            </ExpansionPanelSummary>
-                            <ExpansionPanelDetails>
-                                <Typography>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                    sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing
-                                    elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
-                                </Typography>
-                            </ExpansionPanelDetails>
-                        </ExpansionPanel>
+                       
                         <ExpansionPanel square expanded={expanded === 'panel5'} onChange={handleChange('panel5')}>
                             <ExpansionPanelSummary aria-controls="panel3d-content" id="panel3d-header">
                                 <Grid className={classes.body_content} >
@@ -163,9 +153,7 @@ function PhuongThucThanhToan() {
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
                                 <Typography>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                    sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing
-                                    elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
+                                Hi Shop thiếu nhân lực nên chưa nâng cấp chức năng này. hẹn bạn vào ngày gần nhất!!!
                                 </Typography>
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
@@ -181,9 +169,7 @@ function PhuongThucThanhToan() {
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
                                 <Typography>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                    sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing
-                                    elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
+                                Hi Shop thiếu nhân lực nên chưa nâng cấp chức năng này. hẹn bạn vào ngày gần nhất!!!
                                 </Typography>
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
@@ -199,9 +185,7 @@ function PhuongThucThanhToan() {
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
                                 <Typography>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                    sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing
-                                    elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
+                                Hi Shop thiếu nhân lực nên chưa nâng cấp chức năng này. hẹn bạn vào ngày gần nhất!!!
                                 </Typography>
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
@@ -217,9 +201,7 @@ function PhuongThucThanhToan() {
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
                                 <Typography>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                    sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing
-                                    elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
+                                Hi Shop thiếu nhân lực nên chưa nâng cấp chức năng này. hẹn bạn vào ngày gần nhất!!!
                                 </Typography>
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
@@ -235,9 +217,7 @@ function PhuongThucThanhToan() {
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
                                 <Typography>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                    sit amet blandit leo lobortis eget. Lorem ipsum dolor sit amet, consectetur adipiscing
-                                    elit. Suspendisse malesuada lacus ex, sit amet blandit leo lobortis eget.
+                                    Hi Shop thiếu nhân lực nên chưa nâng cấp chức năng này. hẹn bạn vào ngày gần nhất!!!
                                 </Typography>
                             </ExpansionPanelDetails>
                         </ExpansionPanel>
