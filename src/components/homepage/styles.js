@@ -67,6 +67,7 @@ const useStyles = makeStyles(theme => ({
         cursor: 'pointer',
         width: '24%',
         height: 'auto',
+        padding:5,
         border: 'thin solid #000',
         borderRadius: '4px',
         flexFlow: 'row',

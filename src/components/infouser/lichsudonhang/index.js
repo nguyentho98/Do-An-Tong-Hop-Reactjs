@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { Grid, Typography} from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -9,8 +9,17 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import useStyles from './styles';
-export default function LichSuDonHang() {
+import { connect } from 'react-redux';
+import { getOrders } from '../../../actions/ordersAction';
+function LichSuDonHang({getOrders,dataOrders}) {
     const classes = useStyles();
+    useEffect(() => {
+      getOrders()
+      return () => {
+        
+      }
+    }, [getOrders])
+    console.log(dataOrders);
     const StyledTableCell = withStyles((theme) => ({
         head: {
           backgroundColor: '#21beff',
@@ -76,3 +85,16 @@ export default function LichSuDonHang() {
         </Grid>
     )
 }
+const mapStateToProps = (state, ownProps) => {
+  return {
+    dataOrders: state.ordersReducer.dataOrders
+  }
+}
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    getOrders: () => {
+      dispatch(getOrders())
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(LichSuDonHang)

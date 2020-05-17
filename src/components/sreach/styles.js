@@ -9,13 +9,13 @@ const useStyles = makeStyles(theme => ({
     },
     contenttitle:{
         textAlign:'center',
-        marginTop:20,
-        marginBottom:20,
+        marginTop:30,
+        marginBottom:30,
     },
     title:{
-        marginTop:20,
+        marginTop:30,
         fontWeight:'bold',
-        fontSize: 20,
+        fontSize: 30,
         // textTransform: 'uppercase',
     },
     inputSreach:{
@@ -23,6 +23,45 @@ const useStyles = makeStyles(theme => ({
     },
     inputSelect01:{
         width:80,
+    },
+    contentThietLapGia:{
+        marginTop:30,
+        marginBottom:30,
+        alignItems: 'center',
+    },
+    tittleThietLapGia:{
+        fontWeight:700,
+        marginLeft:10,
+    },
+    contentSlider:{
+        display:'flex',
+        justifyContent:'center',
+    },
+    slider:{
+        width:'75%',
+        marginLeft: '20px',
+        marginRight: '20px',
+    },
+    min:{
+        height: '30px',
+        width: '79px',
+        border: '1px solid',
+        textAlign: 'center',
+        lineHeight: 2,
+    },
+    max:{
+        height: '30px',
+        width: '79px',
+        border: '1px solid',
+        textAlign: 'center',
+        lineHeight: 2,   
+        marginRight:30,
+    },
+    buttonFilter:{
+        textTransform:'none',
+        color:'white',
+        fontWeight:700,
+        backgroundColor:'#21beff'
     }
    
 }));

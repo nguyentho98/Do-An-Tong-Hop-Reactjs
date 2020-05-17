@@ -7,6 +7,7 @@ import loginReducer from '../reducers/loginReducer';
 import registerReducer from '../reducers/registerReducer';
 import detailReducer from '../reducers/detailReducer';
 import userReducer from '../reducers/userReducer';
+import ordersReducer from '../reducers/ordersReducer';
 var redux = require('redux');   
 const allReducers=redux.combineReducers({
     productReducer:productReducer,
@@ -16,6 +17,7 @@ const allReducers=redux.combineReducers({
     registerReducer:registerReducer,
     detailReducer:detailReducer,
     userReducer:userReducer,
+    ordersReducer:ordersReducer,
 })
 var store=createStore(allReducers,applyMiddleware(thunk)); 
 

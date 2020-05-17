@@ -84,7 +84,10 @@ const useStyles = makeStyles(theme => ({
       dropdownMenuCart:{
           padding:0,
           width:'100%',
-      }
+      },
+      bar_btn_text:{
+        marginLeft:3
+    }
        
 }));
 export default useStyles

@@ -20,5 +20,4 @@ const HomePage = ({match} )=> {
         </div>  
   );
 }
-
 export default HomePage;

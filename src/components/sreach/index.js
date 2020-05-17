@@ -1,14 +1,15 @@
 import React from 'react'
-import { Grid, Container, Typography, TextField } from '@material-ui/core';
+import { Grid, Container, Typography, TextField,Button } from '@material-ui/core';
 import useStyles from './styles';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Slider from '@material-ui/core/Slider';
 import Products from './../products/index';
+import { withStyles } from '@material-ui/core/styles';
 const currencies = [
     {
       value: '0',
-      label: 'Chọn mệnh giá thẻ',
+      label: 'Tất cả danh mục',
     },
     {
         value: '20000',
@@ -35,7 +36,7 @@ const currencies = [
 const currencies1 = [
     {
       value: '0',
-      label: 'Chọn mệnh giá thẻ',
+      label: 'Mặc định',
     },
     {
         value: '20000',
@@ -61,10 +62,28 @@ const currencies1 = [
 ]
 function valuetext(value) {
     return `${value}°C`;
-  }
+}
+
+const CusSlider = withStyles((theme) => ({
+    thumb:{
+        width:18,
+        height:18,
+    },
+    track:{
+        height:8,
+    },
+    rail:{
+        height:8,
+    },
+    root:{
+        color:'#8392e7'
+    }
+}))(Slider);
+
 function Sreach({match}) {
     const classes = useStyles();
     const [currency, setCurrency] = React.useState('0');
+    const [currency1, setCurrency1] = React.useState('0');
     const [value, setValue] = React.useState([0, 100]);
 
     const handleChange01 = (event, newValue) => {
@@ -74,6 +93,9 @@ function Sreach({match}) {
     const handleChange02 = (event) => {
       setCurrency(event.target.value);
     };
+    const handleChange03 = (event) => {
+      setCurrency1(event.target.value);
+    };
     return (
         <Grid className={classes.root}>
             <Container maxWidth="md" className={classes.container_sreach}>
@@ -82,7 +104,7 @@ function Sreach({match}) {
                 </Grid>
                 <Grid container spacing={4}> 
                     <Grid md="4" item>
-                         <TextField id="outlined-basic" placeholder="Nhập từ khóa tìm kiếm" variant="outlined"  className={classes.inputSreach}/>
+                         <TextField id="outlined-basic" placeholder="Nhập từ khóa tìm kiếm..." variant="outlined"  className={classes.inputSreach}/>
                     </Grid>
                     <Grid md="4" item>
                         <TextField
@@ -109,8 +131,8 @@ function Sreach({match}) {
                     <Grid md="4" item>
                         <TextField
                             select
-                            value={currency}
-                            onChange={handleChange02}
+                            value={currency1}
+                            onChange={handleChange03}
                             SelectProps={{
                                 native: true,
                             }}
@@ -118,7 +140,7 @@ function Sreach({match}) {
                             className={classes.inputSelect}
                             variant="outlined"
                             >
-                        {currencies.map((option) => (
+                        {currencies1.map((option) => (
                             <option key={option.value} value={option.value}>
                             {option.label}
                             </option>
@@ -126,19 +148,28 @@ function Sreach({match}) {
                         </TextField>
                     </Grid>
                 </Grid>
-                <Grid container>
+                <Grid container className={classes.contentThietLapGia}>
                    <Grid md="2"> 
-                         <Typography>Thiết lập giá tiền</Typography>
+                         <Typography className={classes.tittleThietLapGia}>Thiết lập giá tiền</Typography>
                    </Grid>
-                   <Grid md="10">
-                        
-                        <Slider
+                   <Grid md="10"  className={classes.contentSlider}>
+                        <Typography className={classes.min}>{value[0]}</Typography>
+                        <CusSlider
                                 value={value}
                                 onChange={handleChange01}
                                 valueLabelDisplay="auto"
                                 aria-labelledby="range-slider"
                                 getAriaValueText={valuetext}
+                                className={classes.slider}
                             />
+                        <Typography className={classes.max}>{value[1]}</Typography>
+                        <Button
+                            variant="contained"
+                            className={classes.buttonFilter}
+                            startIcon={<i className="fa fa-filter" style={{fontSize:'16px'}} aria-hidden="true"></i>}  
+                        >
+                        Lọc
+                        </Button>
                     </Grid>
                        
                 </Grid>

@@ -56,3 +56,8 @@ export const  SET_VIEW_EDIT_USER = 'SET_VIEW_EDIT_USER'
 
 // get Limit
 export const  ACT_PRODUCT_LIMIT = 'ACT_PRODUCT_LIMIT'
+
+// get orders theo khách hàng
+export const  GET_ORDERS_REQUEST= 'GET_ORDERS_REQUEST'
+export const  GET_ORDERS_SUCCESS= 'GET_ORDERS_SUCCESS'
+export const  GET_ORDERS_FAILURE= 'GET_ORDERS_FAILURE'
