@@ -51,7 +51,7 @@ export function getAllDataProduct() {
       .catch((err) => console.log('err:', err))
   }
 }
-export function actProductLimit() {
+export function actLimit() {
   return {
     type: types.ACT_PRODUCT_LIMIT
   }

@@ -1,11 +1,12 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { Grid, Container, Typography, TextField,Button } from '@material-ui/core';
 import useStyles from './styles';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Slider from '@material-ui/core/Slider';
-import Products from './../products/index';
+import Products from '../products/index';
 import { withStyles } from '@material-ui/core/styles';
+import { fetchSearch } from '../../actions/searchAction';
 const currencies = [
     {
       value: '0',
@@ -80,12 +81,14 @@ const CusSlider = withStyles((theme) => ({
     }
 }))(Slider);
 
-function Sreach({match}) {
+function Search({match,fetchSearch,dataSearch,page,limit}) {
     const classes = useStyles();
     const [currency, setCurrency] = React.useState('0');
     const [currency1, setCurrency1] = React.useState('0');
     const [value, setValue] = React.useState([0, 100]);
-
+    useEffect(() => {
+        fetchSearch(match.params.category_id,page,limit)
+    }, [match.params.category_id,page])
     const handleChange01 = (event, newValue) => {
       setValue(newValue);
     };
@@ -173,10 +176,24 @@ function Sreach({match}) {
                     </Grid>
                        
                 </Grid>
-                <Products match={match}></Products>
+                <Products match={match} limitData={dataSearch}></Products>
             </Container>
         </Grid>
     )
 }
 
-export default connect(null, null)(Sreach)
+const mapStateToProps = (state, ownProps) => {
+    return {
+        dataSearch: state.searchReducer.dataSearch,
+        page: state.productReducer.page,
+        limit: state.productReducer.limit,
+    }
+}
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        fetchSearch: (category_id,page,limit) => {
+            dispatch(fetchSearch(category_id,page,limit))
+        },
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Search)

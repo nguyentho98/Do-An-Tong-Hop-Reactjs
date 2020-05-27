@@ -8,6 +8,8 @@ import registerReducer from '../reducers/registerReducer';
 import detailReducer from '../reducers/detailReducer';
 import userReducer from '../reducers/userReducer';
 import ordersReducer from '../reducers/ordersReducer';
+import categoryReducer from '../reducers/categoryReducer';
+import searchReducer from '../reducers/searchReducer';
 var redux = require('redux');   
 const allReducers=redux.combineReducers({
     productReducer:productReducer,
@@ -18,6 +20,8 @@ const allReducers=redux.combineReducers({
     detailReducer:detailReducer,
     userReducer:userReducer,
     ordersReducer:ordersReducer,
+    categoryReducer:categoryReducer,
+    searchReducer:searchReducer,
 })
 var store=createStore(allReducers,applyMiddleware(thunk)); 
 

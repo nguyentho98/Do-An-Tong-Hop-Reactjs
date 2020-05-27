@@ -5,7 +5,7 @@ import { history } from './../reducers/history';
 import Login from '../components/login/index';
 import Register from '../components/register/index';
 import DetailContainer from '../containers/DetailContainer';
-import SreachContainer from '../containers/SreachContainer';
+import SearchContainer from '../containers/SearchContainer';
 import HomePage from './../containers/HomePage';
 import CartContainer from './../containers/CartContainer';
 import PTTTContainer from './../containers/PTTTContainer';
@@ -43,9 +43,9 @@ const App = () => {
           component={({ match }) => <InfoUserContainer match={match} />}
         />
         <Route
-          path='/sreach'
+          path='/search'
           exact={false}
-          component={() => <SreachContainer />}
+          component={() => <SearchContainer />}
         />
         <Route
           path='/cart'

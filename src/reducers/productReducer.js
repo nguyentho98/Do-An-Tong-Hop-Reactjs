@@ -25,10 +25,7 @@ switch (action.type) {
         ...state,
     }
     case types.GET_LIMITDATAPRODUCT_SUCCESS:
-        // const array=state.limitDataProduct
-        // console.log(action.data);
         const array=_.concat(state.limitDataProduct,action.data)
-        console.log(array);
     return {
         ...state,
         limitDataProduct:array

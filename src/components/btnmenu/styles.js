@@ -87,6 +87,13 @@ const useStyles = makeStyles(theme => ({
       },
       bar_btn_text:{
         marginLeft:3
+    },
+    btn_listItem:{
+        color: '#000',
+        '&:hover':{
+            textDecoration:'none',
+            color:'black'
+        }
     }
        
 }));

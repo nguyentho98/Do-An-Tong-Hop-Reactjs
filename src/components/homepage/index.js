@@ -17,6 +17,8 @@ import anh4 from '../../utils/images/anh4.png';
 import anh5 from '../../utils/images/anh5.png';
 import Slideshow from './../slideshow/slideshow';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { fetchCategory } from '../../actions/categoryAction';
 const collection = [
     { src: img1 },
     { src: img2 },
@@ -24,55 +26,11 @@ const collection = [
     { src: img4 },
     { src: img5 },
 ];
-const menu = [
-    {
-        value: <i className="fab fa-steam-symbol"></i>,
-        text: 'Game trên Steam',
-    },
-    {
-        value: <i className="fas fa-trophy"></i>,
-        text: 'PUBG',
-    },
-    {
-        value: <i className="fab fa-optin-monster"></i>,
-        text: 'Game trên Origin',
-    },
-    {
-        value: <i className="fab fa-angellist"></i>,
-        text: 'Game trên Battle.net',
-    },
-    {
-        value: <i className="fas fa-wallet"></i>,
-        text: 'Steam Wallet',
-    },
-    {
-        value: <i className="fab fa-itunes"></i>,
-        text: 'Gói nạp iTunes',
-    },
-    {
-        value: <i className="fab fa-phoenix-framework"></i>,
-        text: 'Gói nạp Garena',
-    },
-    {
-        value: <i className="fab fa-google-play"></i>,
-        text: 'Google Play',
-    },
-    {
-        value: <i className="fas fa-tshirt"></i>,
-        text: 'Áo Ekko',
-    },
-    {
-        value: <i className="fas fa-wallet"></i>,
-        text: 'Nintendo Eshop Card',
-    },
-    {
-        value: <i className="fas fa-magic"></i>,
-        text: 'Tiện ích',
-    },
-];
-export default function HomePage() {
+
+function HomePage({fetchCategory,category}) {
     useEffect(() => {
         window.scrollTo(0, 0)
+        fetchCategory()
     }, [])
     const classes = useStyles();
     return (
@@ -88,20 +46,22 @@ export default function HomePage() {
                         aria-labelledby="nested-list-subheader"
                         className={classes.list_menu}
                     >
-                        {menu.map((options) => (
-                            <ListItem button className={classes.list_item} key={options}>
-                                <ListItemIcon className={classes.list_item_icon} >
-                                    {options.value}
-                                </ListItemIcon>
-                                <ListItemText primary={options.text} />
-                            </ListItem>
+                        {category.map((options) => (
+                            <NavLink to={`search/${options.id}`}  className={classes.btn_listItem}> 
+                                <ListItem button className={classes.list_item} >
+                                    <ListItemIcon className={classes.list_item_icon} >
+                                        <i className={options.icon}></i>
+                                    </ListItemIcon>
+                                    <ListItemText primary={options.name} />
+                                </ListItem>
+                            </NavLink>
                         ))}
 
                     </List>
                 </Grid>
                 <Grid className={classes.menu_right} container>
                     <Grid container className={classes.btn}>
-                        <NavLink to={"/sreach"} className={classes.btn_menu}>
+                        <NavLink to={"/search"} className={classes.btn_menu}>
                             <i className="fab fa-hotjar"></i>
                             <Typography variant="body1" className={classes.bar_btn_text}>Mua nhiều trong 24h</Typography>
                         </NavLink>
@@ -147,3 +107,16 @@ export default function HomePage() {
 
     )
 }
+const mapStateToProps = (state, ownProps) => {
+    return {
+        category: state.categoryReducer.category,
+    }
+}
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        fetchCategory: () => {
+            dispatch(fetchCategory())
+        },
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage)

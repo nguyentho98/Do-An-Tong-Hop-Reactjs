@@ -7,13 +7,13 @@ import Typography from '@material-ui/core/Typography';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import useStyles from './styles';
 import {  NavLink ,Redirect} from "react-router-dom";
-import { getLimitDataProduct ,actProductLimit,getAllDataProduct} from '../../actions/productAction';
+import { getLimitDataProduct ,actLimit,getAllDataProduct} from '../../actions/productAction';
 import { actAddToCart } from '../../actions/cartAction';
 import { connect } from 'react-redux'
 import { history } from './../../reducers/history';
 
 
-function Products({limitData,allData,actCountQuantityCart,viewLoadMore,dataCart,getAllDataProduct, page,getLimitDataProduct, addCartSuceess, actAddToCart ,addCartClose,limit,actProductLimit}) {
+function Products({limitData,allData,actCountQuantityCart,viewLoadMore,dataCart,getAllDataProduct, page,getLimitDataProduct, addCartSuceess, actAddToCart ,addCartClose,limit,actLimit}) {
     const classes = useStyles();
         useEffect(() => {
             actCountQuantityCart(countQuantityCart())
@@ -40,7 +40,7 @@ function Products({limitData,allData,actCountQuantityCart,viewLoadMore,dataCart,
         }
     }
     const onClickGetProductLimit  = () => {
-        actProductLimit()
+        actLimit()
         // actloadMore()
     }
     // const actloadMore  = () => {
@@ -124,7 +124,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        actProductLimit: () => dispatch(actProductLimit()),
+        actLimit: () => dispatch(actLimit()),
         addCartSuceess: (item) => dispatch({ type: "addCart",item }),
         addCartClose: () => dispatch({ type: "addCartClose" }),
         viewLoadMore: () => dispatch({ type: "viewLoadMore" }),

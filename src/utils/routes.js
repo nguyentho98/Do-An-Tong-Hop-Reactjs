@@ -3,7 +3,7 @@ import React from 'react'
 import Login from '../components/login/index';
 import Register from '../components/register/index';
 import DetailContainer from '../containers/DetailContainer';
-import SreachContainer from '../containers/SreachContainer';
+import SearchContainer from '../containers/SearchContainer';
 import HomePage from './../containers/HomePage';
 import CartContainer from './../containers/CartContainer';
 import PTTTContainer from './../containers/PTTTContainer';
@@ -38,9 +38,9 @@ const routes=[
         main: () => <InfoUserContainer/>
     },
     {
-        path:'/sreach',
+        path:'/search/:category_id',
         exact:false,
-        main: ({match}) => <SreachContainer match={match}/>
+        main: ({match}) => <SearchContainer match={match}/>
     },
     {
         path:'/cart',
