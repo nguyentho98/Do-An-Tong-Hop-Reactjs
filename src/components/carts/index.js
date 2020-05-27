@@ -8,7 +8,20 @@ import SearchIcon from '@material-ui/icons/Search';
 import { actRemoveProductToCart,actUpdateProductToCart,fetchDataMaGG,actSubThongTinUser,actThongTinUser } from '../../actions/cartAction';
 import { connect } from 'react-redux';
 import { history } from './../../reducers/history';
-function Carts({ dataCart, actRemoveProductToCart, actUpdateProductToCart,actFetchDataMaGG ,dataMaGG,user,actSubThongTinUser,}) {
+import { checkUserThanhToan } from '../../actions/userAction';
+import { postOrders } from '../../actions/ordersAction';
+function Carts({ dataCart,
+     actRemoveProductToCart, 
+     actUpdateProductToCart,
+     actFetchDataMaGG,
+     dataMaGG,
+     user,
+     actSubThongTinUser,
+     actcheckUserThanhToan,
+     actCountQuantityCart,
+     actPostOrders,
+     loggedIn,
+     checkUserThanhToan}) {
     const classes = useStyles();
     const [sateQuantity, setSateQuantity] = useState(1) // số lượng sản phẩm
     const [sateMagGiamGia, setSateMagGiamGia] = useState(0) // 0 là ko hiện gì, 1 là có mã giảm giá , 2 là mã giảm giá ko tồn tại
@@ -20,6 +33,7 @@ function Carts({ dataCart, actRemoveProductToCart, actUpdateProductToCart,actFet
     useEffect(() => {
         window.scrollTo(0, 0)
         actFetchDataMaGG()
+        actCountQuantityCart(countQuantityCart())
     }, [])
     const handleChange = event => {
         setSearchMaGiamGia(event.target.value);
@@ -30,15 +44,15 @@ function Carts({ dataCart, actRemoveProductToCart, actUpdateProductToCart,actFet
                 dataCart.map((item, key) =>
                     <Grid container className={classes.thanhtoan_carts_item}>
                         <Grid md={3}>
-                            <Avatar alt="Remy Sharp" src={"http://localhost:1337" + item.product.ProPicture.url} className={classes.image}></Avatar>
+                            <Avatar alt="Remy Sharp" src={"http://doanekko.com:8080/public/upload/" + item.product.picture} className={classes.image}></Avatar>
                         </Grid>
                         <Grid md={5}>
-                            <Typography component="h3" variant="h5" className={classes.text_name}>{item.product.ProName}</Typography>
+                            <Typography component="h3" variant="h5" className={classes.text_name}>{item.product.name}</Typography>
                             <Typography className={classes.text_stats}>Tình trạng: <span className={classes.text_stats_sub_01}>Còn hàng</span></Typography>
                             <Typography className={classes.text_delete} onClick={() => onDelete(item.product)} variant="overline">Xoá</Typography>
                         </Grid>
                         <Grid md={2}>
-                            <Typography className={classes.text_price}>{item.product.ProPrice}</Typography>
+                            <Typography className={classes.text_price}>{item.product.price} VNĐ</Typography>
                         </Grid>
                         <Grid md={2}>
                             <Button variant="contained" color="" className={classes.btn_remove}
@@ -63,18 +77,21 @@ function Carts({ dataCart, actRemoveProductToCart, actUpdateProductToCart,actFet
         var total = 0;
         if (cart.length > 0) {
             for (let i = 0; i < cart.length; i++) {
-                total += cart[i].product.ProPrice * cart[i].quantity
+                total += cart[i].product.price * cart[i].quantity
             }
         }
         return total;
     }
     const onDelete = (product) => {
+        actCountQuantityCart(countQuantityCart())
         actRemoveProductToCart(product)
+       
     }
     const onUpdateQuantity = (product, quantity) => {
         if (quantity > 0) {
             setSateQuantity(quantity)
             actUpdateProductToCart(product, quantity)
+            actCountQuantityCart(countQuantityCart())
         }
     }
     const showQuantity = (a) => {
@@ -89,21 +106,21 @@ function Carts({ dataCart, actRemoveProductToCart, actUpdateProductToCart,actFet
         if(sateTemp.length>0){
             if (cart.length > 0) {
                 for (let i = 0; i < cart.length; i++) {
-                    total += cart[i].product.ProPrice * cart[i].quantity
+                    total += cart[i].product.price * cart[i].quantity
                 }
             }
-            total=total-sateTemp[0].Sotiengiam
+            total=total-sateTemp[0].money
         }else{
             if (cart.length > 0) {
                 for (let i = 0; i < cart.length; i++) {
-                    total += cart[i].product.ProPrice * cart[i].quantity
+                    total += cart[i].product.price * cart[i].quantity
                 }
             } 
         }
         return total;
     }
     const onClickSearchMaGG  = () => {
-        var temp =  dataMaGG.filter(item => item.Magiamgia === searchMaGiamGia)  
+        var temp =  dataMaGG.filter(item => item.code === searchMaGiamGia)  
         setSateTemp(temp)
         if(temp.length>0){
             setSateMagGiamGia(1)
@@ -113,7 +130,7 @@ function Carts({ dataCart, actRemoveProductToCart, actUpdateProductToCart,actFet
     }
     const ViewMaGiamGia  = () => {
         if(sateMagGiamGia===1){
-        return <Grid style={{textAlign:'center',marginBottom: 14}}>Số tiền đc giảm của {sateTemp[0].Sotiengiam}</Grid>
+        return <Grid style={{textAlign:'center',marginBottom: 14}}>Số tiền đc giảm của {sateTemp[0].money}</Grid>
         }else if(sateMagGiamGia===2){
             return <Grid style={{textAlign:'center',marginBottom: 14}}>Mã giảm giá không tồn tại</Grid>
         }else{
@@ -122,11 +139,11 @@ function Carts({ dataCart, actRemoveProductToCart, actUpdateProductToCart,actFet
     }
     const checkSoDu  = (cart) => {
         var total = 0;
-        var surplus=user ? user.Surplus : 0;
+        var surplus=user ? user.money : 0;
         var sotiencannap=0;
         if (cart.length > 0) {
             for (let i = 0; i < cart.length; i++) {
-                total += cart[i].product.ProPrice * cart[i].quantity
+                total += cart[i].product.price * cart[i].quantity
             }
             if(total>surplus){
                 setSateViewBtnThanhToan(false)
@@ -139,10 +156,21 @@ function Carts({ dataCart, actRemoveProductToCart, actUpdateProductToCart,actFet
         return sotiencannap;
     }
     const onClickThanhToan  = () => {
-        actSubThongTinUser()
-        actThongTinUser()
-        history.push("/info");
+        const order={}
+        order.total=showTongTien(dataCart);
+        order.payments=0;
+        order.CusID=5;
+        order.DisID=1;
+        order.status=1;
+        if(checkUserThanhToan){
+            actPostOrders(order)
+        }else{
+            actSubThongTinUser()
+            actThongTinUser()
+            history.push("/info");
+        }   
     }
+    
     const ViewBtnThanhToan  = ({item}) => {
         if(sateViewBtnThanhToan){
             return (
@@ -174,7 +202,29 @@ function Carts({ dataCart, actRemoveProductToCart, actUpdateProductToCart,actFet
             )
         }
     }
- 
+    const ViewBtnThanhToanChuaLogin  = () => {
+        if(loggedIn){
+            return <Grid></Grid>
+        }else{
+            return (
+                <NavLink to="/login" className={classes.btn_title_text}>
+                    Thanh Toán
+                </NavLink>     
+            )
+        }
+    }
+    const countQuantityCart  = () => {
+        var temp=0;
+        if(dataCart?.length > 0 ){
+         for (let index = 0; index < dataCart.length; index++) {
+           const element = dataCart[index];
+           temp+=element.quantity;
+         }
+        }else{
+            temp=0;
+        }
+        return temp;
+    }
     return (
         <Grid>
             <Container maxWidth="md" className={classes.container_carts}>
@@ -245,10 +295,7 @@ function Carts({ dataCart, actRemoveProductToCart, actUpdateProductToCart,actFet
                                 <Link to="/" style={{ border: '1px solid #DDD', textDecoration: 'none', color: 'black', padding: 5, borderRadius: 4 }}>
                                     Tiếp tục mua hàng
                                 </Link>
-                                {/* <Link to="/test" className={classes.btn_thanhtoan}>
-                                    Thanh Toán
-                                </Link> */}
-
+                               <ViewBtnThanhToanChuaLogin></ViewBtnThanhToanChuaLogin>      
                             </Grid>
                         </Grid>
                     </Grid>
@@ -262,7 +309,9 @@ const mapStateToProps = (state, ownProps) => {
     return {
         dataCart: state.cartReducer.dataCart,
         dataMaGG: state.cartReducer.dataMaGG,
-        user: state.loginReducer.user
+        user: state.loginReducer.user,
+        checkUserThanhToan: state.userReducer.checkUserThanhToan,
+        loggedIn: state.loginReducer.loggedIn
     }
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -282,6 +331,14 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         actThongTinUser:() => {
             dispatch(actThongTinUser())
         },
+        actCheckUserThanhToan:() => {
+            dispatch(checkUserThanhToan())
+        },
+        actPostOrders:(order) => {
+            dispatch(postOrders(order))
+        },
+        actCountQuantityCart: (payload) => dispatch({ type: "actCountQuantityCart" ,payload}),
+        
         
     }
 }

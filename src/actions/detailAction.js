@@ -20,7 +20,7 @@ export function getDetailFailure() {
 export function fetchDetail(id) {
   return (dispatch) => {
     dispatch(getDetailRequest())
-    fetch('http://localhost:1337/Products/'+id, {
+    fetch('http://doanekko.com:8080/public/products/'+id, {
       method: 'GET',
         }).then(response => {
               return response.json()

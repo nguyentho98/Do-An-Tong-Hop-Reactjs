@@ -1,4 +1,5 @@
 import * as types from '../constants/ActionTypes';
+import _ from 'lodash'
 const productInitialState = {
     limitDataProduct: [],
 
@@ -8,7 +9,9 @@ const productInitialState = {
 
     item:{},
 
-    limit:1,
+    limit:8,
+
+    page:1,
 
     allDataProduct:[],
 
@@ -22,9 +25,13 @@ switch (action.type) {
         ...state,
     }
     case types.GET_LIMITDATAPRODUCT_SUCCESS:
+        // const array=state.limitDataProduct
+        // console.log(action.data);
+        const array=_.concat(state.limitDataProduct,action.data)
+        console.log(array);
     return {
         ...state,
-        limitDataProduct: action.data
+        limitDataProduct:array
     }
     case types.GET_ALLDATAPRODUCT_SUCCESS:
         return {
@@ -38,7 +45,7 @@ switch (action.type) {
     case types.ACT_PRODUCT_LIMIT:
         
         return {
-            ...state, limit:state.limit+3
+            ...state, page:state.page+1
         }  
     // Thêm vào giỏ Hàng
     case "addCart":{

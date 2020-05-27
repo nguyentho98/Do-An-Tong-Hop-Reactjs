@@ -4,7 +4,8 @@ const productInitialState = {
     dataCart: data ? data: [],
     dataMaGG:[],
     statusUser:0,
-    stateViewThongTinUser:false
+    stateViewThongTinUser:false,
+    countQuantityCart:0,
 }
 const cartReducer = (state = productInitialState, action) => {
     var {quantity,product}=action;
@@ -26,7 +27,8 @@ const cartReducer = (state = productInitialState, action) => {
         case types.DELETE_PRODUCT_TO_CART:{
             var temp =  state.dataCart.filter(item => item.product.id !== product.id)
             localStorage.setItem('CART',JSON.stringify(temp))
-            return {...state,dataCart:temp}
+            var a=countQuantityCart(temp)
+            return {...state,dataCart:temp,countQuantityCart:a}
         }     
         case types.UPDATE_PRODUCT_TO_CART:{
             index=findProductInCart(state.dataCart,product);
@@ -72,6 +74,10 @@ const cartReducer = (state = productInitialState, action) => {
         case "onClickItemUser":
             return {
                 ...state, statusUser:action.value
+            }  
+        case "actCountQuantityCart":
+            return {
+                ...state, countQuantityCart:action.payload
             }      
         default:
             return {...state}
@@ -88,6 +94,18 @@ const findProductInCart  = (cart,product) => {
         }
     }
     return index
+}
+const countQuantityCart  = (dataCart) => {
+    var temp=0;
+    if(dataCart.length > 0 ){
+     for (let index = 0; index < dataCart.length; index++) {
+       const element = dataCart[index];
+       temp+=element.quantity;
+     }
+    }else{
+        temp=0;
+    }
+    return temp;
 }
 
 export default cartReducer

@@ -35,11 +35,11 @@ const useStyles = makeStyles(theme => ({
         marginLeft:'auto',
     },
     title_naptien:{
-        fontWeight:'bold',
+        fontWeight:700,
     },
     title_thanhtoan:{
         textAlign:'center',
-        fontWeight:'bold',
+        fontWeight:700,
         marginBottom:10
     },
     thanhtoan_container:{
@@ -182,7 +182,7 @@ const useStyles = makeStyles(theme => ({
         btn_napthemtien_text:{
             textDecoration:'none',
             color:'white',
-            fontWeight:'bold',
+            fontWeight:700,
             '&:hover':{
                 color:'white',
                 textDecoration:'none',
@@ -191,7 +191,7 @@ const useStyles = makeStyles(theme => ({
         btn_thanhtoan_text:{
             textDecoration:'none',
             color:'white',
-            fontWeight:'bold',
+            fontWeight:700,
             '&:hover':{
                 color:'white',
                 textDecoration:'none',
@@ -242,7 +242,7 @@ const useStyles = makeStyles(theme => ({
         },
         text_price:{
             fontSize:16,
-            fontWeight:'bold',
+            fontWeight:700,
         },
         text_stats_sub_01:{
             color:'green'

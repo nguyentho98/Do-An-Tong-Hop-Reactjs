@@ -17,16 +17,18 @@ import { actUpdateProductToCart } from './../../actions/cartAction';
 import { actAddToCart } from '../../actions/cartAction';
 import { NavLink } from 'react-router-dom';
 import { history } from './../../reducers/history';
-function Detail({ fetchDetail, item, match,addCartSuceess,actAddToCart,actAddToCartMuaNgay ,addCartClose}) {
+function Detail({ fetchDetail, item, match,addCartSuceess,actAddToCart,actAddToCartMuaNgay ,addCartClose,actCountQuantityCart, dataCart}) {
     const classes = useStyles();
     const [sateQuantity, setSateQuantity] = useState(1)
     console.log(item);
     useEffect(() => {
-        fetchDetail(match.params.id)   
+        fetchDetail(match.params.id)  
+        actCountQuantityCart(countQuantityCart()) 
     }, [])
     const onUpdateQuantity = (product, quantity) => {
         if (quantity > 0) {
             setSateQuantity(quantity)
+           
         }
     }
    
@@ -35,16 +37,31 @@ function Detail({ fetchDetail, item, match,addCartSuceess,actAddToCart,actAddToC
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
         setTimeout(()=>addCartClose(),3000)
         actAddToCart(item,quantity)
+        actCountQuantityCart(countQuantityCart())
     }
     const onClickAddCarts = (item) => {
         if(localStorage.getItem('USER')){
             actAddToCartMuaNgay(item)
+            actCountQuantityCart(countQuantityCart())
             return history.push("/cart");
         }else{
             actAddToCartMuaNgay(item)
+            actCountQuantityCart(countQuantityCart())
             return history.push("/login");
         }
        
+    }
+    const countQuantityCart  = () => {
+        var temp=0;
+        if(dataCart?.length > 0 ){
+         for (let index = 0; index < dataCart.length; index++) {
+           const element = dataCart[index];
+           temp+=element.quantity;
+         }
+        }else{
+            temp=0;
+        }
+        return temp;
     }
     return (
         item !== undefined &&
@@ -55,17 +72,17 @@ function Detail({ fetchDetail, item, match,addCartSuceess,actAddToCart,actAddToC
                         <HomeIcon className={classes.icon} />
                     </Link>
                     <Link color="inherit" href="/" >
-                        {item.ProName}
+                        {item.name}
                     </Link>
                 </Breadcrumbs>
                 <Grid className={classes.container_title_detail_product}>
-                    <Typography className={classes.title_detail_product}>{item.ProName}</Typography>
+                    <Typography className={classes.title_detail_product}>{item.name}</Typography>
                 </Grid>
                 <Grid container spacing={4}>
                     <Grid md={6} item>
                         <Carousel showArrows={true}>
                             <div>
-                                <img src={"http://localhost:1337" +item.ProPicture?.url } alt="xin chào" />
+                                <img src={"http://doanekko.com:8080/public/upload/" +item.picture } alt="xin chào" />
                             </div>
                         </Carousel>
                     </Grid>
@@ -101,7 +118,7 @@ function Detail({ fetchDetail, item, match,addCartSuceess,actAddToCart,actAddToC
                         </Grid>
                         <Grid className={classes.price_text}>GIÁ SẢN PHẨM</Grid>
                         <Grid className={classes.price_new}>
-                            <NumberFormat className={classes.price} value={item.ProPrice} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <div className={classes.price}>{value}</div>} />
+                            <NumberFormat className={classes.price} value={item.price} displayType={'text'} thousandSeparator={true}  renderText={value => <div className={classes.price}>{value}</div>} /> 
                         </Grid>
                         <hr style={{ margin: '10px auto', borderTop: '1px solid #ccc' }}></hr>
                         <Grid>
@@ -135,8 +152,7 @@ function Detail({ fetchDetail, item, match,addCartSuceess,actAddToCart,actAddToC
                 <Grid>
                     <Typography className={classes.chitietsanpham}>Chi Tiết Sản Phẩm</Typography>
                     <Typography variant="body2" gutterBottom>
-                        Trò chơi nằm trong mạch truyện chính của series Grand Theft Auto, mạch truyện này được tính là từ khi bắt đầu nội dung của trò chơi Grand Theft Auto IV (2008), không liên hệ nội dung đến các phần trước Grand Theft Auto IV. Nằm trong tiểu bang hư cấu San Andreas, mô phỏng Nam California, câu chuyện nói về ba tên tội phạm và nỗ lực của họ trong việc thực hiện các cuộc tấn công trong thế giới ngầm bên cạnh là chống lại chính phủ và các thế lực khác. Trò chơi được thiết kế theo kiểu thế giới mở cho phép người chơi tự do đi khắp nơi, các vùng nông thôn, rừng núi, hoang mạc và thành phố hư cấu Los Santos, mô phỏng thành phố Los Angeles ngoài đời.
-                        Trò chơi hỗ trợ chơi theo góc nhìn thứ nhất (FPS - First Person Shooter) và thứ ba (TPS - Third Person Shooter), di chuyển trong thế giới bằng cách điều hướng chân để đi bộ hoặc phương tiện giao thông. Người chơi điều khiển ba nhân vật chính xuyên suốt trò chơi và có thể chuyển đổi điều khiển qua lại giữa các nhân vật ở ngoài hoặc trong nhiệm vụ (một số phân đoạn trong nhiệm vụ buộc người chơi phải điều khiển một nhân vật nhất định hoặc phải chuyển đổi sang nhân vật khác). Câu chuyện chủ yếu xoay quanh những việc của tội phạm như trộm cướp, đánh nhau, liên hệ đến việc bắn súng và lái xe. Hệ thống cảnh sát trong trò chơi sẽ luôn cố gắng kiểm soát người chơi khi thực hiện những hành vi tội ác đến mức độ nào đó bằng cách bắt vào tù hoặc giết, số sao truy nã (tối đa là năm sao) càng cao thì mức độ nguy hiểm của cảnh sát đối với nhân vật càng tăng, tương tự như những phần Grand Theft Auto trước đó. Grand Theft Auto Online , chế độ chơi trực tiếp nhiều người chơi, cho phép lên đến 30 người chơi cùng khám phá thế giới, làm nhiệm vụ, tham gia các trò chơi như đánh nhau, đua xe,...
+                        {item.info}
                      </Typography>
                 </Grid>
                 <hr style={{ border: '0.5px solid #aaa4a4', marginTop: 20, marginBottom: 20 }}></hr>
@@ -152,7 +168,8 @@ function Detail({ fetchDetail, item, match,addCartSuceess,actAddToCart,actAddToC
 }
 const mapStateToProps = (state, ownProps) => {
     return {
-        item: state.detailReducer.detail
+        item: state.detailReducer.detail,
+        dataCart: state.cartReducer.dataCart,
     }
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -168,6 +185,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         actAddToCartMuaNgay: (payload,quantity) => {
             dispatch(actAddToCart(payload, 1))
         },
+        actCountQuantityCart: (payload) => dispatch({ type: "actCountQuantityCart" ,payload}),
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Detail)

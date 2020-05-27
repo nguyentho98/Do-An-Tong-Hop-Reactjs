@@ -2,10 +2,9 @@ import * as types from '../constants/ActionTypes';
 import * as action from './alertAction';
 import { history } from '../reducers/history';
 import axios from 'axios';
-export function requestRegister(user) {
+export function requestRegister() {
     return {
-      type: types.REGISTER_REQUEST,
-      user
+      type: types.REGISTER_REQUEST,  
     }
   }
   
@@ -16,10 +15,9 @@ export function requestRegister(user) {
     }
   }
   
-  export function failureRegister(error) {
+  export function failureRegister() {
     return {
       type: types.GETALL_FAILURE,
-      error
     }
   }
   export function register(user) {

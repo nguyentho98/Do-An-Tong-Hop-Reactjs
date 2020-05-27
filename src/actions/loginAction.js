@@ -32,7 +32,8 @@ export function login(username, password) {
     })
     .then(response => {
       // Handle success.
-        history.push('/');
+        // history.goBack()
+        history.push('/')
         dispatch(successLogin(response.data.user))  
         localStorage.setItem('USER', JSON.stringify(response.data.user));
     })
@@ -49,5 +50,6 @@ export function login(username, password) {
 
 export function logout() {
   localStorage.removeItem('USER');
+  localStorage.removeItem('CART');
   return { type: types.LOGOUT };
 }

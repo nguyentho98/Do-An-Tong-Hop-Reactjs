@@ -23,14 +23,15 @@ export function getDataFailure() {
     type: types.FETCHING_DATAPRODUCT_FAILURE
   }
 }
-export function getLimitDataProduct(limit) {
+export function getLimitDataProduct(page,limit) {
   return (dispatch) => {
     dispatch(getDataProduct())
-    fetch('http://localhost:1337/Products?_limit='+limit, {
+    fetch('http://doanekko.com:8080/public/products?page='+page+'&limit='+limit, {
       method: 'GET',
         }).then(response => {
               return response.json()
         }).then(json => {    
+          console.log(json);
           dispatch(getLimitDataSuccess(json))  
       })
       .catch((err) => console.log('err:', err))
@@ -39,7 +40,8 @@ export function getLimitDataProduct(limit) {
 export function getAllDataProduct() {
   return (dispatch) => {
     dispatch(getDataProduct())
-    fetch('http://localhost:1337/Products', {
+    fetch('http://doanekko.com:8080/public/products', {
+    
       method: 'GET',
         }).then(response => {
               return response.json()
@@ -52,6 +54,5 @@ export function getAllDataProduct() {
 export function actProductLimit() {
   return {
     type: types.ACT_PRODUCT_LIMIT
-     
   }
 }

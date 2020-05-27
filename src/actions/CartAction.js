@@ -34,16 +34,15 @@ export function successMaGG(data) {
   }
 }
 
-export function failureMaGG(error) {
+export function failureMaGG() {
   return {
     type: types.GETMAGG_FAILURE,
-    error
   }
 }
 export function fetchDataMaGG() {
   return (dispatch) => {
     dispatch(requestMaGG())
-    fetch('http://localhost:1337/Giam-Gias', {
+    fetch('http://doanekko.com:8080/public/discounts', {
       method: 'GET',
         }).then(response => {
               return response.json()

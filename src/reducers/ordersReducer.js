@@ -1,6 +1,7 @@
 import * as types from '../constants/ActionTypes';
 const initialState = {
-   dataOrders:[]
+   dataOrders:[],
+   postOrders:[]
 }
 const ordersReducer = (state = initialState, action)=> {
   switch (action.type) {
@@ -11,6 +12,14 @@ const ordersReducer = (state = initialState, action)=> {
         dataOrders: action.orders
       };
     case types.GET_ORDERS_REQUEST:
+      return {};
+    case types.POST_ORDERS_FAILURE:
+      return {};
+    case types.POST_ORDERS_SUCCESS:
+      return {
+        postOrders: action.orders
+      };
+    case types.POST_ORDERS_FAILURE:
       return {};
     default:
       return state

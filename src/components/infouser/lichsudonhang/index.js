@@ -41,17 +41,9 @@ function LichSuDonHang({getOrders,dataOrders}) {
         },
       }))(TableRow);
       
-      function createData(name, calories, fat, carbs, protein) {
-        return { name, calories, fat, carbs, protein };
-      }
+    
       
-      const rows = [
-        createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-        createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-        createData('Eclair', 262, 16.0, 24, 6.0),
-        createData('Cupcake', 305, 3.7, 67, 4.3),
-        createData('Gingerbread', 356, 16.0, 49, 3.9),
-      ];
+
     return (
         <Grid className={classes.root}>
             <Typography variant="h5" className={classes.title}>Lịch Sử Đơn Hàng</Typography>
@@ -60,23 +52,21 @@ function LichSuDonHang({getOrders,dataOrders}) {
             <Table className={classes.table} aria-label="customized table">
                 <TableHead>
                 <TableRow>
-                    <StyledTableCell>Ngày Tạo</StyledTableCell>
-                    <StyledTableCell>Đơn hàng</StyledTableCell>
-                    <StyledTableCell >Tên sản phẩm</StyledTableCell>
-                    <StyledTableCell >Tổng Cộng</StyledTableCell>
-                    <StyledTableCell>Hành Động</StyledTableCell>
+                    <StyledTableCell>Ngày tạo</StyledTableCell>
+                    <StyledTableCell>Mã đơn hàng</StyledTableCell>
+                    <StyledTableCell >Tên người nhận</StyledTableCell>
+                    <StyledTableCell>Hành động</StyledTableCell>
                 </TableRow>
                 </TableHead>
                 <TableBody>
-                {rows.map((row) => (
-                    <StyledTableRow key={row.name}>
+                {dataOrders?.map((row) => (
+                    <StyledTableRow key={row.id}>
+                       <StyledTableCell >{row.date}</StyledTableCell>
                     <StyledTableCell component="th" scope="row">
-                        {row.name}
+                        {row.id}
                     </StyledTableCell>
-                    <StyledTableCell >{row.calories}</StyledTableCell>
-                    <StyledTableCell>{row.fat}</StyledTableCell>
-                    <StyledTableCell >{row.carbs}</StyledTableCell>
-                    <StyledTableCell >{row.protein}</StyledTableCell>
+                    <StyledTableCell >{row.customers}</StyledTableCell>
+                    <StyledTableCell >1</StyledTableCell>
                     </StyledTableRow>
                 ))}
                 </TableBody>

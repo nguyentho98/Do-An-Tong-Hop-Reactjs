@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { Typography } from '@material-ui/core';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import useStyles from './styles';
 import { NavLink,Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-const Example = ({dataCart}) => {
+const Example = ({countQuantityCart}) => {
   const classes = useStyles();
   const [dropdownOpen, setDropdownOpen] = useState(false)
   
-
+  useEffect(() => { 
+    return () => {
+      
+    }
+  }, [])
   const toggle = () => {
     setDropdownOpen(!dropdownOpen)
   }
@@ -32,7 +36,7 @@ const Example = ({dataCart}) => {
             <Typography variant="body1" className={classes.header_btn_2_text}>
             Giỏ Hàng
             </Typography>
-          <Typography variant="body1" className={classes.header_btn_2_quantity}>{dataCart.length > 0 ? dataCart.length : 0}</Typography>
+          <Typography variant="body1" className={classes.header_btn_2_quantity}>{countQuantityCart}</Typography>
         </DropdownToggle>
       </Link>
       {/* <DropdownMenu className={classes.dropdownMenuCart}>
@@ -43,7 +47,7 @@ const Example = ({dataCart}) => {
 }
 const mapStateToProps = (state, ownProps) => {
   return {
-    dataCart: state.cartReducer.dataCart
+    countQuantityCart: state.cartReducer.countQuantityCart
   }
 }
 export default connect(mapStateToProps,null)(Example)

@@ -5,13 +5,18 @@ import FormGroup  from '@material-ui/core/FormGroup';
 
 import InputBase from '@material-ui/core/InputBase';
 import { connect } from 'react-redux';
-import { setViewEditUser } from './../../../actions/userAction';
-function ThongTinTaiKhoan({stateViewThongTinUser,setViewEditUser,viewEditUser,test}) {
+import { setViewEditUser, checkUserThanhToan } from './../../../actions/userAction';
+import { history } from './../../../reducers/history';
+function ThongTinTaiKhoan({stateViewThongTinUser,setViewEditUser,viewEditUser,checkUserThanhToan,actCheckUserThanhToan}) {
     const classes = useStyles();
     // const [state,setState]=React.useState(true)
     useEffect (()=>{
         return () => { console.log("componentWillUnmount")}
     },[])
+    const onClickXacNhan  = () => {
+        history.push("/cart");
+        actCheckUserThanhToan()
+    }
     const View  = () => {
         const onClickEdit  = () => {
             setViewEditUser()        
@@ -187,7 +192,12 @@ function ThongTinTaiKhoan({stateViewThongTinUser,setViewEditUser,viewEditUser,te
                     </FormGroup >
                     <FormGroup className={classes.formGroup}>
                         <InputLabel className={classes.inputLabel} htmlFor="my-input"></InputLabel> 
+                        <Grid>Mã xác thực không chính xác vui lòng thử lại !</Grid>
+                    </FormGroup >
+                    <FormGroup className={classes.formGroup}>
+                        <InputLabel className={classes.inputLabel} htmlFor="my-input"></InputLabel> 
                         <Button
+                        onClick={()=>onClickXacNhan()}
                         variant="contained"
                         classes={{
                             root: classes.buttonXacNhan,
@@ -222,13 +232,17 @@ function ThongTinTaiKhoan({stateViewThongTinUser,setViewEditUser,viewEditUser,te
 const mapStateToProps = (state, ownProps) => {
     return {
         stateViewThongTinUser: state.cartReducer.stateViewThongTinUser,
-        viewEditUser: state.userReducer.viewEditUser
+        viewEditUser: state.userReducer.viewEditUser,
+        checkUserThanhToan: state.userReducer.checkUserThanhToan
     }
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         setViewEditUser: () => {
             dispatch(setViewEditUser())
+        },
+        actCheckUserThanhToan: () => {
+            dispatch(checkUserThanhToan())
         },
     }
 }

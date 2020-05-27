@@ -44,14 +44,14 @@ function Login({ clearAlerts, login, alert }) {
                             <i className="far fa-envelope" style={{ position: 'absolute', color: '#777', top: '10px', left: '10px', fontSize: '18px' }}></i>
                             <input type="email"  name="email" value={sateUser.email} onChange={(e) => handleChange(e)} placeholder="Địa chỉ Email" className={classes.input} />
                             {sateSubmitted && !sateUser.email &&
-                                <div className="help-block" style={{ color: '#a94442', margin: '5px 0px' }}>Email is required</div>
+                                <div className="help-block" style={{ color: '#a94442', margin: '5px 0px' }}>Vui lòng nhập Email !</div>
                             }
                         </div>
                         <div className={classes.formGroup}>
                             <i className="fas fa-lock" style={{ position: 'absolute', color: '#777', top: '10px', left: '10px', fontSize: '18px' }}></i>
                             <input type="password" name="password" value={sateUser.password} onChange={(e) => handleChange(e)} placeholder="Mật khẩu" className={classes.input} />
                             {sateSubmitted && !sateUser.password &&
-                                <div className="help-block" style={{ color: '#a94442', margin: '5px 0px' }}>Password is required</div>
+                                <div className="help-block" style={{ color: '#a94442', margin: '5px 0px' }}>Vui lòng nhập mật khẩu !</div>
                             }
                         </div>
                         <Grid className={classes.divLink}>
