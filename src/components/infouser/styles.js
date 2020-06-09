@@ -63,7 +63,7 @@ const useStyles = makeStyles(theme => ({
     account_name_text1:{
         fontSize:20,
         color:'white',
-        fontWeight:'bold'
+        fontWeight:700
     },
     account_name_text2:{
         fontSize:13,
@@ -85,7 +85,7 @@ const useStyles = makeStyles(theme => ({
     },
     account_info_item_text:{
         fontSize:'15px',
-        fontWeight:'bold',
+        fontWeight:700,
     },
     tab:{
         padding:'20px 0',
@@ -99,7 +99,7 @@ const useStyles = makeStyles(theme => ({
         marginLeft: '5px',
     },
     tabs_text1:{
-        fontWeight: 'bold',
+        fontWeight: 700,
         textTransform: 'none',
     },
     tabs_text2:{

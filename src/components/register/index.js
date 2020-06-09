@@ -7,10 +7,8 @@ import { register } from './../../actions/registerAction';
 import { connect } from 'react-redux';
 import { history } from './../../reducers/history';
 
-function Register({ alert, clearAlerts, register }) {
-    history.listen((location, action) => {
-        clearAlerts();
-    });
+function Register({ alert, alertClear, register }) {
+
     const classes = useStyles();
     const [sateUser, setSateUser] = useState({
         email: '',
@@ -33,6 +31,7 @@ function Register({ alert, clearAlerts, register }) {
         setSateSubmitted(true)
         if ( pattern.test(sateUser.email) && sateUser.fullname.length >= 6 && (sateUser.username.length >=6 ||sateUser.username.length <= 16) && sateUser.password && (sateUser.phone.length >=9 ||sateUser.phone.length <= 11)  ) {
             register(sateUser)
+            setTimeout(()=>alertClear(),2000)
         }
     }
     return (
@@ -154,9 +153,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        clearAlerts: () => {
-            dispatch(clear())
-        },
+        alertClear:()=>{dispatch(clear())},
         register: (user) => {
             dispatch(register(user))
         }

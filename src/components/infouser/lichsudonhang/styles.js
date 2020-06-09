@@ -4,7 +4,7 @@ const useStyles = makeStyles(theme => ({
         marginTop:15
     },
     title:{
-        fontWeight:'bold',
+        fontWeight:700,
         fontSize: 16,
         textTransform: 'uppercase',
     },
@@ -91,7 +91,7 @@ const useStyles = makeStyles(theme => ({
     },
     title_text_02:{
         fontSize: '13px',
-        fontWeight: 'bold',
+        fontWeight: 700,
         textTransform: 'uppercase',
         fontFamily: "'Roboto Condensed', sans-serif",
     },

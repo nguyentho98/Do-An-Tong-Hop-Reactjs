@@ -84,8 +84,7 @@ function Carts({ dataCart,
     }
     const onDelete = (product) => {
         actCountQuantityCart(countQuantityCart())
-        actRemoveProductToCart(product)
-       
+        actRemoveProductToCart(product)  
     }
     const onUpdateQuantity = (product, quantity) => {
         if (quantity > 0) {

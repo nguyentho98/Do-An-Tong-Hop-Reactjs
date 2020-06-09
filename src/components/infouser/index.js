@@ -15,6 +15,7 @@ import ThayDoiMatKhau from './thaydoimatkhau';
 import SanPhamYeuThich from './sanphamyeuthich';
 import moment from 'moment';
 import { connect } from 'react-redux';
+import { getOrders } from '../../actions/ordersAction';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -44,9 +45,15 @@ function a11yProps(index) {
   };
 }
 
- function InfoUser({user,statusUser,onClickItemUser}) {
+ function InfoUser({user,statusUser,onClickItemUser, getOrders}) {
   const classes = useStyles();
   const [orderDetail, setOrderDetail] = React.useState([]);
+  useEffect(() => {
+    getOrders(user.id)
+    return () => {
+      
+    }
+  }, [getOrders])
   const Tab = withStyles({
     selected: {
       backgroundColor: 'white'
@@ -209,7 +216,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     onClickItemUser: (value) => {
       dispatch({type:"onClickItemUser",value})
-    }
+    },
+    getOrders: (id) => {
+      dispatch(getOrders(id))
+    },
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(InfoUser)

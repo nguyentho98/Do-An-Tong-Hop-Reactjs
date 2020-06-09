@@ -13,7 +13,10 @@ const userReducer = (state = initialState, action)=> {
       return {
           ...state,checkUserThanhToan:!state.checkUserThanhToan
         };
-   
+    case types.CHANGE_PASSWORD:
+      return {
+          ...state,
+        };
     default:
       return state
   }

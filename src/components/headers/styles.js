@@ -134,7 +134,7 @@ const useStyles = makeStyles(theme => ({
       padding: '2px 5px',
       color: '#1c1c1c !important',
       borderRadius: '3px',
-      fontWeight: 'bold',
+      fontWeight: 700,
       marginRight: '2px',
     },
     carts:{

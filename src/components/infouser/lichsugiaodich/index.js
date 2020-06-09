@@ -52,22 +52,16 @@ export default function LichSuGiaoDich() {
                 <TableHead>
                 <TableRow>
                     <StyledTableCell>Ngày Tạo</StyledTableCell>
-                    <StyledTableCell>Đơn hàng</StyledTableCell>
-                    <StyledTableCell >Tên sản phẩm</StyledTableCell>
-                    <StyledTableCell >Tổng Cộng</StyledTableCell>
-                    <StyledTableCell>Hành Động</StyledTableCell>
+                    <StyledTableCell>Miêu tả</StyledTableCell>
+                    <StyledTableCell >Số tiền</StyledTableCell>
                 </TableRow>
                 </TableHead>
                 <TableBody>
                 {rows.map((row) => (
                     <StyledTableRow key={row.name}>
-                    <StyledTableCell component="th" scope="row">
-                        {row.name}
-                    </StyledTableCell>
+                    <StyledTableCell component="th" scope="row">{row.name}</StyledTableCell>
                     <StyledTableCell >{row.calories}</StyledTableCell>
                     <StyledTableCell>{row.fat}</StyledTableCell>
-                    <StyledTableCell >{row.carbs}</StyledTableCell>
-                    <StyledTableCell >{row.protein}</StyledTableCell>
                     </StyledTableRow>
                 ))}
                 </TableBody>

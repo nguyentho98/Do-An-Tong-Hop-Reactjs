@@ -4,7 +4,7 @@ const useStyles = makeStyles(theme => ({
         marginTop:15
     },
     title:{
-        fontWeight:'bold',
+        fontWeight:700,
         fontSize: 16,
         textTransform: 'uppercase',
     },
@@ -13,6 +13,21 @@ const useStyles = makeStyles(theme => ({
     },
     containerTable:{
         overflow:'unset'
-    }
+    },
+    buttonADD:{
+        backgroundColor: '#21beff',
+        color:'white',
+        padding:' 6px 10px',
+        textTransform: 'none',
+        minWidth:0,
+    },
+    buttonDelete:{
+        backgroundColor: '#e47a77',
+        color:'white',
+        padding: '6px 10px',
+        marginLeft:5,
+        textTransform: 'none',
+        minWidth:0,
+    },
 }));
 export default useStyles

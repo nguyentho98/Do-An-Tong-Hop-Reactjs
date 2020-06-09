@@ -59,21 +59,7 @@ function ThongTinTaiKhoan({stateViewThongTinUser,setViewEditUser,viewEditUser,fe
                              </Grid> 
                             : 
                             <Grid>
-                                <InputBase
-                                    placeholder="Email"
-                                    classes={{
-                                        root: classes.inputRoot,
-                                        input: classes.inputInput,
-                                        
-                                    }}
-                                    type="text"
-                                    name="email"
-                                    readOnly={true}
-                                    
-                                    onChange={(e) => handleChange(e)}
-                                    value={stateUser.email}
-                                />
-                               
+                               <input type="email" name="email" value={stateUser.email} onChange={(e) => handleChange(e)} aria-describedby="helpId" placeholder="Nhập địa chỉ email" className={classes.input} /> 
                             </Grid>
                             }
                        
@@ -85,20 +71,7 @@ function ThongTinTaiKhoan({stateViewThongTinUser,setViewEditUser,viewEditUser,fe
                         {viewEditUser ? <Grid  className={classes.text_info_detail} >{user?user.username:<Grid  className={classes.text_info_detail_1} >(Chưa có thông tin)</Grid>}</Grid>
                             : 
                             <Grid>
-                                <InputBase
-                                    placeholder="username"
-                                    classes={{
-                                        root: classes.inputRoot,
-                                        input: classes.inputInput,
-                                        
-                                    }}
-                                    
-                                    type="text"
-                                    name="username"
-                                    onChange={(e) => handleChange(e)}
-                                    value={stateUser.username}
-                                   
-                                />
+                               <input type="text" name="username" value={stateUser.username} onChange={(e) => handleChange(e)} aria-describedby="helpId" placeholder="Nhập username" className={classes.input} /> 
                             </Grid>
                             }
                     </FormGroup >
@@ -108,19 +81,7 @@ function ThongTinTaiKhoan({stateViewThongTinUser,setViewEditUser,viewEditUser,fe
                         {viewEditUser ? <Grid  className={classes.text_info_detail} >{user?user.name:<Grid  className={classes.text_info_detail_1} >(Chưa có thông tin)</Grid>}</Grid>
                             : 
                             <Grid>
-                                <InputBase
-                                    placeholder="Họ và tên"
-                                    classes={{
-                                        root: classes.inputRoot,
-                                        input: classes.inputInput,
-                                        
-                                    }}
-                                   
-                                    name="name"
-                                    onChange={(e) => handleChange(e)}
-                                    value={stateUser.name}
-                                   
-                                />
+                                <input type="text" name="name" value={stateUser.name} onChange={(e) => handleChange(e)} aria-describedby="helpId" placeholder="Nghề nghiệp" className={classes.input} /> 
                             </Grid>
                             }
                     </FormGroup >
@@ -130,19 +91,7 @@ function ThongTinTaiKhoan({stateViewThongTinUser,setViewEditUser,viewEditUser,fe
                         {viewEditUser ? <Grid  className={classes.text_info_detail} >{user?user.phone:<Grid  className={classes.text_info_detail_1} >(Chưa có thông tin)</Grid>}</Grid>
                             : 
                             <Grid>
-                                <InputBase
-                                    placeholder="Số điện thoại"
-                                    classes={{
-                                        root: classes.inputRoot,
-                                        input: classes.inputInput,
-                                        
-                                    }}
-                                   
-                                    name="phone"
-                                    onChange={(e) => handleChange(e)}
-                                    value={stateUser.phone}
-                                    
-                                />
+                                <input type="text" name="phone" value={stateUser.phone} onChange={(e) => handleChange(e)} aria-describedby="helpId" placeholder="Nghề nghiệp" className={classes.input} /> 
                             </Grid>
                         }
                     </FormGroup >
@@ -151,18 +100,7 @@ function ThongTinTaiKhoan({stateViewThongTinUser,setViewEditUser,viewEditUser,fe
                         {viewEditUser ? <Grid > {user.cmnd?<Grid  className={classes.text_info_detail} >{user.cmnd}</Grid>:<Grid  className={classes.text_info_detail_1} >(Chưa có thông tin)</Grid>}</Grid>
                             : 
                             <Grid>
-                                <InputBase
-                                    placeholder=""
-                                    classes={{
-                                        root: classes.inputRoot,
-                                        input: classes.inputInput,
-                                        
-                                    }}
-                                    type="text"
-                                    onChange={(e) => handleChange(e)}
-                                    value={stateUser.cmnd}
-                                    name="cmnd"
-                                />
+                               <input type="text" name="cmnd" value={stateUser.cmnd} onChange={(e) => handleChange(e)} aria-describedby="helpId" placeholder="Số chứng minh nhân dân" className={classes.input} /> 
                             </Grid>
                             }
                         
@@ -172,18 +110,7 @@ function ThongTinTaiKhoan({stateViewThongTinUser,setViewEditUser,viewEditUser,fe
                         {viewEditUser ?  <Grid > {user.sex?<Grid  className={classes.text_info_detail} >{user.sex}</Grid>:<Grid  className={classes.text_info_detail_1} >(Chưa có thông tin)</Grid>}</Grid>
                             : 
                             <Grid>
-                                <InputBase
-                                    placeholder=""
-                                    classes={{
-                                        root: classes.inputRoot,
-                                        input: classes.inputInput,
-                                        
-                                    }}
-                                    type="text"
-                                    onChange={(e) => handleChange(e)}
-                                    value={stateUser.sex}
-                                    name="sex"
-                                />
+                               <input type="text" name="sex" value={stateUser.sex} onChange={(e) => handleChange(e)} aria-describedby="helpId" placeholder="Giới tính" className={classes.input} /> 
                             </Grid>
                             }
                     </FormGroup >
@@ -192,18 +119,7 @@ function ThongTinTaiKhoan({stateViewThongTinUser,setViewEditUser,viewEditUser,fe
                         {viewEditUser ?  <Grid > {user.address?<Grid  className={classes.text_info_detail} >{user.address}</Grid>:<Grid  className={classes.text_info_detail_1} >(Chưa có thông tin)</Grid>}</Grid>
                             : 
                             <Grid>
-                                <InputBase
-                                    placeholder=""
-                                    classes={{
-                                        root: classes.inputRoot,
-                                        input: classes.inputInput,
-                                        
-                                    }}
-                                    type="text"
-                                    onChange={(e) => handleChange(e)}
-                                    value={stateUser.address}
-                                    name="address"
-                                />
+                               <input type="text" name="address" value={stateUser.address} onChange={(e) => handleChange(e)} aria-describedby="helpId" placeholder="Địa chỉ" className={classes.input} /> 
                             </Grid>
                             }
                     </FormGroup >
@@ -212,19 +128,7 @@ function ThongTinTaiKhoan({stateViewThongTinUser,setViewEditUser,viewEditUser,fe
                         {viewEditUser ?  <Grid > {user.job?<Grid  className={classes.text_info_detail} >{user.job}</Grid>:<Grid  className={classes.text_info_detail_1} >(Chưa có thông tin)</Grid>}</Grid>
                             : 
                             <Grid>
-                                <InputBase
-                                    placeholder=""
-                                    classes={{
-                                        root: classes.inputRoot,
-                                        input: classes.inputInput,
-                                        
-                                    }}
-                                    type="text"
-                                    onChange={(e) => handleChange(e)}
-                                    value={stateUser.job}
-                                    name="job"
-                                />
-                               
+                               <input type="text" name="job" value={stateUser.job} onChange={(e) => handleChange(e)} aria-describedby="helpId" placeholder="Nghề nghiệp" className={classes.input} /> 
                             </Grid>
                             }
                     </FormGroup >
@@ -238,10 +142,10 @@ function ThongTinTaiKhoan({stateViewThongTinUser,setViewEditUser,viewEditUser,fe
                                 type="submit"
                                 className={classes.buttonSave}
                                 >
-                                Lưu
+                                Cập nhật
                                 </Button>
                                 <Button
-                                variant="contained"
+                                variant="outlined"
                                 onClick={()=>onClickEdit()}
                                 className={classes.buttonCancel}
                                 >
@@ -284,7 +188,6 @@ function ThongTinTaiKhoan({stateViewThongTinUser,setViewEditUser,viewEditUser,fe
                         classes={{
                             root: classes.buttonXacNhan,
                             container: classes.buttonContainerXacNhan,
-                            
                         }}
                         >
                         Xác nhận

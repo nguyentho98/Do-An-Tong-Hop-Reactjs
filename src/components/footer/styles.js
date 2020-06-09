@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     },
     item_text_1:{
         fontSize: '13px',
-        fontWeight: 'bold',
+        fontWeight: 700,
         textTransform: 'uppercase',
         fontFamily: "'Roboto Condensed', sans-serif",
     },
@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
         fontSize: '16px',
         fontFamily: "'Roboto-Condensed-Bold'",
         color: '#000',
-        fontWeight:'bold'
+        fontWeight:700
     },
 }));
 export default useStyles

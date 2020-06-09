@@ -1,17 +1,36 @@
 import React from 'react'
-import { Grid, Typography} from '@material-ui/core';
+import { Grid, Typography, } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
+import Button from '@material-ui/core/Button';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import CloseIcon from '@material-ui/icons/Close';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import useStyles from './styles';
 import { connect } from 'react-redux';
-function SanPhamYeuThich({dataLove}) {
+import { actAddToCart  } from '../../../actions/cartAction';
+import {actDeleteProductToLove } from '../../../actions/loveAction';
+function SanPhamYeuThich({dataLove,addCartSuceess,actAddToCart,addCartClose,actCountQuantityCart,dataCart,actDeleteProductToLove}) {
     const classes = useStyles();
+    const StyledTableRow = withStyles((theme) => ({
+      root: {
+        '&:nth-of-type(odd)': {
+          backgroundColor: theme.palette.background.default,
+        },
+      },
+    }))(TableRow);
+
+    const StyledButton = withStyles((theme) => ({
+      startIcon: {
+        marginLeft:0,
+        marginRight:0
+      },
+    }))(Button);
     const StyledTableCell = withStyles((theme) => ({
         head: {
           backgroundColor: '#21beff',
@@ -24,14 +43,31 @@ function SanPhamYeuThich({dataLove}) {
         },
         
       }))(TableCell);
-      
-      const StyledTableRow = withStyles((theme) => ({
-        root: {
-          '&:nth-of-type(odd)': {
-            backgroundColor: theme.palette.background.default,
-          },
-        },
-      }))(TableRow);
+
+
+    const onClickAddCartSuccess = (item,quantity) => {
+        addCartSuceess(item)
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+        setTimeout(()=>addCartClose(),3000)
+        actAddToCart(item,quantity)
+        actCountQuantityCart(countQuantityCart())
+    }
+    const countQuantityCart  = () => {
+      var temp=0;
+      if(dataCart?.length > 0 ){
+       for (let index = 0; index < dataCart.length; index++) {
+         const element = dataCart[index];
+         temp+=element.quantity;
+       }
+      }else{
+          temp=0;
+      }
+      return temp;
+    }
+    const onDelete = (product) => {
+      actDeleteProductToLove(product)  
+    }
+  
       
     return (
         <Grid className={classes.root}>
@@ -49,13 +85,29 @@ function SanPhamYeuThich({dataLove}) {
                 </TableRow>
                 </TableHead>
                 <TableBody>
-                {dataLove.map((row) => (
-                    <StyledTableRow key={row.id}>
-                    <StyledTableCell component="th" scope="row">{row.product.name}</StyledTableCell>
+                {dataLove.map((item) => (
+                    <StyledTableRow key={item.id}>
+                    <StyledTableCell component="th" scope="row">{item.product.name}</StyledTableCell>
                     <StyledTableCell ></StyledTableCell>
-                    <StyledTableCell>{row.fat}</StyledTableCell>
-                    <StyledTableCell >{row.product.price}</StyledTableCell>
-                    <StyledTableCell >Thêm</StyledTableCell>
+                    <StyledTableCell>{item.fat}</StyledTableCell>
+                    <StyledTableCell >{item.product.price}</StyledTableCell>
+                    <StyledTableCell style={{textAlign:'center'}}>
+                      <StyledButton
+                        variant="contained"
+                        className={classes.buttonADD}
+                        startIcon={<ShoppingCartIcon />}
+                        onClick={()=>onClickAddCartSuccess(item.product,1)}
+                      >
+                      </StyledButton>
+
+                      <StyledButton
+                        variant="contained"
+                        className={classes.buttonDelete}
+                        startIcon={<CloseIcon />}
+                        onClick={()=>onDelete(item.product)}
+                      >
+                      </StyledButton>
+                    </StyledTableCell>
                     </StyledTableRow>
                 ))}
                 </TableBody>
@@ -67,11 +119,20 @@ function SanPhamYeuThich({dataLove}) {
 const mapStateToProps = (state, ownProps) => {
   return {
     dataLove: state.loveReducer.dataLove,
+    dataCart: state.cartReducer.dataCart,
   }
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-   
+    addCartSuceess: (item) => dispatch({ type: "addCart",item }),
+    addCartClose: () => dispatch({ type: "addCartClose" }),
+    actAddToCart: (payload,quantity) => {
+        dispatch(actAddToCart(payload, quantity))
+    },
+    actCountQuantityCart: (payload) => dispatch({ type: "actCountQuantityCart" ,payload}),
+    actDeleteProductToLove: (payload) => {
+      dispatch(actDeleteProductToLove(payload))
+  },
   }
 }
-export default connect(mapStateToProps, null)(SanPhamYeuThich)
+export default connect(mapStateToProps, mapDispatchToProps)(SanPhamYeuThich)

@@ -11,16 +11,11 @@ import Paper from '@material-ui/core/Paper';
 import useStyles from './styles';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { getOrders,getOrderDetail ,actStateViewOrderDetail} from '../../../actions/ordersAction';
-function LichSuDonHang({getOrders,dataOrders,stateViewOrder,dataOrderDetail,getOrderDetail,actStateViewOrderDetail,seenOrderDetail,orderDetail}) {
+import { getOrderDetail ,actStateViewOrderDetail} from '../../../actions/ordersAction';
+function LichSuDonHang({dataOrders,stateViewOrder,dataOrderDetail,getOrderDetail,actStateViewOrderDetail,seenOrderDetail,orderDetail}) {
     const classes = useStyles();
     const user=JSON.parse(localStorage.getItem('USER'))
-    useEffect(() => {
-      getOrders(user.id)
-      return () => {
-        
-      }
-    }, [getOrders])
+    
     const onClickXemChiTiet  = (row) => {
       getOrderDetail(row.id)
       actStateViewOrderDetail()
@@ -193,9 +188,6 @@ const mapStateToProps = (state, ownProps) => {
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    getOrders: (id) => {
-      dispatch(getOrders(id))
-    },
     getOrderDetail: (id) => {
       dispatch(getOrderDetail(id))
     },

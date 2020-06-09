@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
         color: '#000',
         margin: 0,
         display: 'inline-block',
-        fontWeight:'bold',
+        fontWeight:700,
     },
     info_detail:{
         backgroundColor: '#fff',
@@ -57,7 +57,7 @@ const useStyles = makeStyles(theme => ({
         marginRight: '3px',
     },
     text_wrap1:{
-        fontWeight:'bold',
+        fontWeight:700,
     },
     price_text:{
         color: '#919191',
@@ -65,14 +65,14 @@ const useStyles = makeStyles(theme => ({
         fontSize: 12,
         marginBottom: 5,
         marginTop:13,
-        fontWeight:'bold'
+        fontWeight:700
     },
     price:{
         fontSize: 24,
-        fontWeight:'bold' 
+        fontWeight:700 
     },
     quantity_text:{
-        fontWeight:'bold'  ,
+        fontWeight:700  ,
         fontSize: 12,
         marginBottom:10,
     },
@@ -93,7 +93,7 @@ const useStyles = makeStyles(theme => ({
         color: '#000',
         margin: 0,
         display: 'inline-block',
-        fontWeight:'bold',
+        fontWeight:700,
     },
     btn_muangay:{
         '&:hover': {

@@ -39,6 +39,8 @@ export const  EDIT_USER_FAILURE= 'EDIT_USER_FAILURE'
 
 export const  LOGOUT= 'USERS_LOGOUT'
 
+export const  CHANGE_PASSWORD= 'CHANGE_PASSWORD'
+
 export const  SUCCESS= 'ALERT_SUCCESS'
 export const  ERROR= 'ALERT_ERROR'
 export const  CLEAR= 'ALERT_CLEAR'

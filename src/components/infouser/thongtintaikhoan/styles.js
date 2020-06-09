@@ -4,7 +4,7 @@ const useStyles = makeStyles(theme => ({
 
     },
     title:{
-        fontWeight:'bold',
+        fontWeight:700,
         fontSize: 16,
         textTransform: 'uppercase',
     },
@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
         marginBottom:0,
     },
     text_info_detail:{
-        fontWeight: 'bold',
+        fontWeight: 700,
         marginLeft: '10px',
         minWidth:' 245px',
     },
@@ -61,15 +61,23 @@ const useStyles = makeStyles(theme => ({
         }
     },
     buttonSave:{
-        backgroundColor: '#ffb517',
+        backgroundColor: '#21beff',
         color:'white',
         textTransform: 'none',
     },
     buttonCancel:{
         // backgroundColor: '#ffb517',
-        color:'white',
+        // color:'white',
         textTransform: 'none',
         marginLeft:20,
+    },
+    input:{
+        marginLeft: '10px',
+        border: '1px solid #eee',
+        padding: '3px 10px',
+        width:' 300px',
+        color:' #000',
+        height: '34px',
     },
 }));
 export default useStyles

@@ -15,7 +15,7 @@ import { connect } from 'react-redux'
 import { history } from './../../reducers/history';
 
 
-function Products({limitData,allData,actCountQuantityCart,actAddToLove,dataCart,getAllDataProduct, page,getLimitDataProduct, addCartSuceess, actAddToCart ,addCartClose,limit,actLimit}) {
+function Products({limitData,allData,actCountQuantityCart,loggedIn,actAddToLove,dataCart,getAllDataProduct, page,getLimitDataProduct, addCartSuceess, actAddToCart ,addCartClose,limit,actLimit}) {
     const classes = useStyles();
         useEffect(() => {
             actCountQuantityCart(countQuantityCart())
@@ -97,7 +97,7 @@ function Products({limitData,allData,actCountQuantityCart,actAddToLove,dataCart,
                     </Grid>
                         <Grid className={classes.grid_cart}>
                             <Grid style={{textAlign:'center'}}>
-                                <FavoriteIcon onClick={(a) => onClickAddLoveSuccess(items)} className={classes.btn_iconlove} />
+                                { loggedIn ? <FavoriteIcon onClick={(a) => onClickAddLoveSuccess(items)} className={classes.btn_iconlove} />: <Grid></Grid> }
                                 <ShoppingCartIcon onClick={(a) => onClickAddCartSuccess(items)} className={classes.btn_iconcart} />
                             </Grid>
                            
@@ -133,6 +133,7 @@ const mapStateToProps = (state, ownProps) => {
         cartSuccess: state.productReducer.cartSuccess,
         loadMore: state.productReducer.loadMore,
         dataCart: state.cartReducer.dataCart,
+        loggedIn: state.loginReducer.loggedIn
     }
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
