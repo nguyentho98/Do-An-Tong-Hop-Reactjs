@@ -5,15 +5,17 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import useStyles from './styles';
 import {  NavLink ,Redirect} from "react-router-dom";
 import { getLimitDataProduct ,actLimit,getAllDataProduct} from '../../actions/productAction';
 import { actAddToCart } from '../../actions/cartAction';
+import { actAddToLove } from '../../actions/loveAction';
 import { connect } from 'react-redux'
 import { history } from './../../reducers/history';
 
 
-function Products({limitData,allData,actCountQuantityCart,viewLoadMore,dataCart,getAllDataProduct, page,getLimitDataProduct, addCartSuceess, actAddToCart ,addCartClose,limit,actLimit}) {
+function Products({limitData,allData,actCountQuantityCart,actAddToLove,dataCart,getAllDataProduct, page,getLimitDataProduct, addCartSuceess, actAddToCart ,addCartClose,limit,actLimit}) {
     const classes = useStyles();
         useEffect(() => {
             actCountQuantityCart(countQuantityCart())
@@ -25,6 +27,13 @@ function Products({limitData,allData,actCountQuantityCart,viewLoadMore,dataCart,
         actAddToCart(item)
         setTimeout(()=>addCartClose(),3000)
         actCountQuantityCart(countQuantityCart())
+    }
+    const onClickAddLoveSuccess = (item) => {
+        addCartSuceess(item)
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+        actAddToLove(item)
+        setTimeout(()=>addCartClose(),3000)
+        
     }
     const onClickAddCarts = (item) => {
         actAddToCart(item)
@@ -87,7 +96,11 @@ function Products({limitData,allData,actCountQuantityCart,viewLoadMore,dataCart,
                         </NavLink>
                     </Grid>
                         <Grid className={classes.grid_cart}>
-                            <ShoppingCartIcon onClick={(a) => onClickAddCartSuccess(items)} className={classes.btn_iconcart} />
+                            <Grid style={{textAlign:'center'}}>
+                                <FavoriteIcon onClick={(a) => onClickAddLoveSuccess(items)} className={classes.btn_iconlove} />
+                                <ShoppingCartIcon onClick={(a) => onClickAddCartSuccess(items)} className={classes.btn_iconcart} />
+                            </Grid>
+                           
                             <Link href=""  className={classes.btn_cart} onClick={() => onClickAddCarts(items)} >
                                 Mua ngay
                             </Link>
@@ -131,6 +144,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         actCountQuantityCart: (payload) => dispatch({ type: "actCountQuantityCart" ,payload}),
         actAddToCart: (payload) => {
             dispatch(actAddToCart(payload, 1))
+        },
+        actAddToLove: (payload) => {
+            dispatch(actAddToLove(payload))
         },
     }
 }

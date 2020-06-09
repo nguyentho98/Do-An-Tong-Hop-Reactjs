@@ -21,6 +21,19 @@ const loginReducer = (state = initialState, action) =>{
       return {
         loggedIn: false,
       };
+    case types.EDIT_USER_REQUEST:
+      return {
+          ...state,
+      }
+    case types.EDIT_USER_SUCCESS:
+        return {
+            ...state,
+            user:action.data
+        }
+    case types.EDIT_USER_FAILURE:
+        return {
+            ...state,
+        }
     default:
       return state
   }

@@ -22,7 +22,7 @@ switch (action.type) {
     // product
     case types.FETCHING_DATAPRODUCT:
     return {
-        ...state,
+        ...state,limitDataProduct:[]
     }
     case types.GET_LIMITDATAPRODUCT_SUCCESS:
         const array=_.concat(state.limitDataProduct,action.data)

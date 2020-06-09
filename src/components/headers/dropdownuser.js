@@ -60,7 +60,7 @@ const Example = ({ logout ,user,actThongTinUser,actLichSuDonHang,actLichSuGiaoDi
         <Grid style={{padding:'0 15px'}}>
           <Typography variant="body1" style={{fontWeight:'bold'}}>Số Dư Tài Khoản</Typography>
           <Grid style={{fontWeight:'bold',display:'flex',marginTop:10,marginLeft:6,marginBottom:15,alignItems:'center'}}>
-            Số dư: {user?.Surplus}
+            Số dư: {user?.money}
             <Avatar src={tien} alt="xin chào" style={{borderRadius:0,width:25,height:25,marginBottom:5}}></Avatar>
             <NavLink to="/phuongthucthanhtoan" className={classes.btnnaptien}>Nạp Tiền</NavLink>
           </Grid>

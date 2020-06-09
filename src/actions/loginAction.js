@@ -22,29 +22,63 @@ export function failureLogin(error) {
     error
   }
 }
-export function login(username, password) {
-  return (dispatch) => {
-    dispatch(requestLogin())
-    axios
-    .post('http://localhost:1337/auth/local', {
-      identifier: username,
-      password: password,
-    })
-    .then(response => {
-      // Handle success.
-        // history.goBack()
-        history.push('/')
-        dispatch(successLogin(response.data.user))  
-        localStorage.setItem('USER', JSON.stringify(response.data.user));
-    })
-    .catch(data => {
-      // Handle error.
-      dispatch(action.error("Email hoặc mật khẩu của bạn không chính xác !!!"));
-     
-    });
+var optionAxios = {
+  headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
   }
 }
-
+// export function login(username, password) {
+//   console.log(username+password);
+//   return (dispatch) => {
+//     dispatch(requestLogin())
+//     axios
+//     .post('http://doanekko.com:8080/public/customers/login', {
+//       email: username,
+//       password: password
+//     },optionAxios)
+//     .then(response => {
+//       // Handle success.
+//         // history.goBack()
+//         console.log(response.data);
+//         history.push('/')
+//         dispatch(successLogin(response.data))  
+//         localStorage.setItem('USER', JSON.stringify(response.data));
+//     })
+//     .catch(data => {
+//       // Handle error.
+//       dispatch(action.error("Email hoặc mật khẩu của bạn không chính xác !!!"));
+     
+//     });
+//   }
+// }
+export function login(username, password) {
+  return (dispatch) => {
+     dispatch(requestLogin())
+     fetch('http://doanekko.com:8080/public/customers/login' ,{
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+       },
+      method: 'post',
+      credentials: "same-origin",
+        body:JSON.stringify({
+          email: username,
+          password: password,
+        }),  
+      }).then(response => {
+            return response.json()
+      }).then(json => {       
+        if (json.error) {
+          dispatch(action.error("Email hoặc mật khẩu của bạn không chính xác !!!"));
+        } else{
+          history.push('/')
+          dispatch(successLogin(json))  
+          localStorage.setItem('USER', JSON.stringify(json));
+        }
+      })
+      .catch((err) => console.log('err:', err))
+      }
+}
 
 
 

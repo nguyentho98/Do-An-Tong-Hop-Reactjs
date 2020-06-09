@@ -9,7 +9,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import useStyles from './styles';
-export default function SanPhamYeuThich() {
+import { connect } from 'react-redux';
+function SanPhamYeuThich({dataLove}) {
     const classes = useStyles();
     const StyledTableCell = withStyles((theme) => ({
         head: {
@@ -32,17 +33,6 @@ export default function SanPhamYeuThich() {
         },
       }))(TableRow);
       
-      function createData(name, calories, fat, carbs, protein) {
-        return { name, calories, fat, carbs, protein };
-      }
-      
-      const rows = [
-        createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-        createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-        createData('Eclair', 262, 16.0, 24, 6.0),
-        createData('Cupcake', 305, 3.7, 67, 4.3),
-        createData('Gingerbread', 356, 16.0, 49, 3.9),
-      ];
     return (
         <Grid className={classes.root}>
             <Typography variant="h5" className={classes.title}>Sản Phẩm Yêu Thích</Typography>
@@ -51,23 +41,21 @@ export default function SanPhamYeuThich() {
             <Table className={classes.table} aria-label="customized table">
                 <TableHead>
                 <TableRow>
-                    <StyledTableCell>Ngày Tạo</StyledTableCell>
-                    <StyledTableCell>Đơn hàng</StyledTableCell>
-                    <StyledTableCell >Tên sản phẩm</StyledTableCell>
-                    <StyledTableCell >Tổng Cộng</StyledTableCell>
-                    <StyledTableCell>Hành Động</StyledTableCell>
+                    <StyledTableCell>Hình ảnh</StyledTableCell>
+                    <StyledTableCell>Tên sản phẩm</StyledTableCell>
+                    <StyledTableCell >Tình trạng</StyledTableCell>
+                    <StyledTableCell >Đơn giá</StyledTableCell>
+                    <StyledTableCell>Thao Tác</StyledTableCell>
                 </TableRow>
                 </TableHead>
                 <TableBody>
-                {rows.map((row) => (
-                    <StyledTableRow key={row.name}>
-                    <StyledTableCell component="th" scope="row">
-                        {row.name}
-                    </StyledTableCell>
-                    <StyledTableCell >{row.calories}</StyledTableCell>
+                {dataLove.map((row) => (
+                    <StyledTableRow key={row.id}>
+                    <StyledTableCell component="th" scope="row">{row.product.name}</StyledTableCell>
+                    <StyledTableCell ></StyledTableCell>
                     <StyledTableCell>{row.fat}</StyledTableCell>
-                    <StyledTableCell >{row.carbs}</StyledTableCell>
-                    <StyledTableCell >{row.protein}</StyledTableCell>
+                    <StyledTableCell >{row.product.price}</StyledTableCell>
+                    <StyledTableCell >Thêm</StyledTableCell>
                     </StyledTableRow>
                 ))}
                 </TableBody>
@@ -76,3 +64,14 @@ export default function SanPhamYeuThich() {
         </Grid>
     )
 }
+const mapStateToProps = (state, ownProps) => {
+  return {
+    dataLove: state.loveReducer.dataLove,
+  }
+}
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+   
+  }
+}
+export default connect(mapStateToProps, null)(SanPhamYeuThich)

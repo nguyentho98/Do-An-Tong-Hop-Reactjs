@@ -39,6 +39,17 @@ const useStyles = makeStyles(theme => ({
     btn_iconcart:{
         margin:'0 auto',
         cursor:'pointer',
+        fontSize:19,
+        color:'#b5b5b5',
+        '&:hover':{
+            color:'#ffb517',
+        }
+    },
+    btn_iconlove:{
+        margin:'0 auto',
+        cursor:'pointer',
+        marginRight:3,
+        fontSize:18.5,
         color:'#b5b5b5',
         '&:hover':{
             color:'#ffb517',

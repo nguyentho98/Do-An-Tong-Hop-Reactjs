@@ -62,9 +62,9 @@ function Register({ alert, clearAlerts, register }) {
                             <i className="far fa-user" style={{ position: 'absolute', color: '#777', top: '10px', left: '10px', fontSize: '18px' }}></i>
                             <input type="text" name="username" value={sateUser.username} onChange={(e) => handleChange(e)} aria-describedby="helpId" placeholder="username" className={classes.input} />
                             {sateSubmitted && !sateUser.username &&
-                                <div className="help-block" style={{ color: '#a94442', margin: '5px 0px' }}>Vui lòng nhập tên username !</div>
+                                <div className="help-block" style={{ color: '#a94442', margin: '5px 0px' }}>Vui lòng nhập tên Username !</div>
                             }
-                            {sateSubmitted && sateUser.username.length !== '' && (sateUser.username.length > 16 || sateUser.username.length < 6 ) &&
+                            {sateSubmitted  && (sateUser.username.length > 16 || sateUser.username.length < 6 ) &&  sateUser.username !== '' &&
                                 <div className="help-block" style={{ color: '#a94442', margin: '5px 0px' }}>Username phải từ 6 đến 16 kí tự !</div>
                             }
                         </div>
@@ -74,9 +74,7 @@ function Register({ alert, clearAlerts, register }) {
                             {sateSubmitted && !sateUser.email &&
                                 <div className="help-block" style={{ color: '#a94442', margin: '5px 0px' }}>Vui lòng nhập Email !</div>
                             }
-                            {/* {sateSubmitted && sateUser.email.length !== '' && pattern.test(sateUser.email) &&
-                                <div className="help-block" style={{ color: '#a94442', margin: '5px 0px' }}>Email không đúng định dạng !</div>
-                            } */}
+                            
                         </div>
                         <div className={classes.formGroup}>
                             <i className="fas fa-phone" style={{ position: 'absolute', color: '#777', top: '10px', left: '10px', fontSize: '18px' }}></i>

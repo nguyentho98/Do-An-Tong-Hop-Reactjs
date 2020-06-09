@@ -10,6 +10,7 @@ import userReducer from '../reducers/userReducer';
 import ordersReducer from '../reducers/ordersReducer';
 import categoryReducer from '../reducers/categoryReducer';
 import searchReducer from '../reducers/searchReducer';
+import loveReducer from '../reducers/loveReducer';
 var redux = require('redux');   
 const allReducers=redux.combineReducers({
     productReducer:productReducer,
@@ -22,6 +23,7 @@ const allReducers=redux.combineReducers({
     ordersReducer:ordersReducer,
     categoryReducer:categoryReducer,
     searchReducer:searchReducer,
+    loveReducer:loveReducer,
 })
 var store=createStore(allReducers,applyMiddleware(thunk)); 
 

@@ -40,7 +40,7 @@ const Alerts = ({ statusSuccess,addCartClose,item }) => {
             </IconButton>
           }
         >
-          Thành công: Bạn đã thêm <span style={{color:'#337ab7 '}}>{item.ProName} </span>vào giỏ hàng !
+          Thành công: Bạn đã thêm <span style={{color:'#337ab7 '}}>{item.name} </span>vào giỏ hàng !
                </Alert>
       </Collapse>
     </Container>

@@ -7,12 +7,13 @@ const userReducer = (state = initialState, action)=> {
   switch (action.type) {
     case types.SET_VIEW_EDIT_USER:
       return {
-          ...state,viewEditUser:false
+          ...state,viewEditUser:!state.viewEditUser
         };
     case types.CHECK_USER_ORDERS:
       return {
           ...state,checkUserThanhToan:!state.checkUserThanhToan
         };
+   
     default:
       return state
   }

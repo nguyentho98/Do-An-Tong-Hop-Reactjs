@@ -282,7 +282,7 @@ function Carts({ dataCart,
                                 </Grid>
                                 <Grid className={classes.list_title_01}>
                                     <Typography style={{ color: '#8e9098' }}>Số dư hiện tại</Typography>
-                                    <Typography className={classes.title_text}>{user?user.Surplus:0} </Typography>
+                                    <Typography className={classes.title_text}>{user?user.money:0} </Typography>
                                 </Grid>
                                 <ViewBtnThanhToan item={dataCart}></ViewBtnThanhToan>
                                 

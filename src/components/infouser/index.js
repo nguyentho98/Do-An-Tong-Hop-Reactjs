@@ -13,7 +13,7 @@ import LichSuDonHang from './lichsudonhang';
 import LichSuGiaoDich from './lichsugiaodich';
 import ThayDoiMatKhau from './thaydoimatkhau';
 import SanPhamYeuThich from './sanphamyeuthich';
-
+import moment from 'moment';
 import { connect } from 'react-redux';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -46,10 +46,7 @@ function a11yProps(index) {
 
  function InfoUser({user,statusUser,onClickItemUser}) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-  // useEffect(() => {
-  //   setValue(statusUser)
-  // }, [])
+  const [orderDetail, setOrderDetail] = React.useState([]);
   const Tab = withStyles({
     selected: {
       backgroundColor: 'white'
@@ -69,7 +66,10 @@ function a11yProps(index) {
   function handleChange(event, newValue) {
     onClickItemUser(newValue);
   }
+  const seenOrderDetail  = (orderDetail) => {
+    setOrderDetail(orderDetail)
 
+  }
   return (
     <Container maxWidth="md" className={classes.container_info}>
       <Grid className={classes.container_header}>
@@ -81,18 +81,18 @@ function a11yProps(index) {
             <img src={infouser2} style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} alt="xin chao" />
           </Grid>
           <Grid className={classes.account_name}>
-            <Typography variant="body2" className={classes.account_name_text1}>Nguyễn Xuân Thọ</Typography>
-            <Typography variant="body2" className={classes.account_name_text2}>Số dư hiện tại : {user.Surplus}</Typography>
+            <Typography variant="body2" className={classes.account_name_text1}>{user.name}</Typography>
+            <Typography variant="body2" className={classes.account_name_text2}>Số dư hiện tại : {user.money}</Typography>
           </Grid>
         </Grid>
         <Grid className={classes.account_info}>
           <Grid className={classes.account_info_item}>
             UserName:
-        <Typography variant="caption" className={classes.account_info_item_text} > Tuoithotranve98</Typography>
+        <Typography variant="caption" className={classes.account_info_item_text} >{user.username}</Typography>
           </Grid>
           <Grid className={classes.account_info_item}>
             Ngày đăng ký:
-          <Typography variant="caption" className={classes.account_info_item_text}> 25/5/2020</Typography>
+          <Typography variant="caption" className={classes.account_info_item_text}> {moment(user.created_at).format("DD MMM YYYY")}</Typography>
           </Grid>
           <Grid className={classes.account_info_item}>
             <Typography variant="caption" className={classes.account_info_item_text}> Member</Typography>
@@ -183,7 +183,7 @@ function a11yProps(index) {
           <ThongTinTaiKhoan user={user}/>
         </TabPanel>
         <TabPanel value={statusUser} index={1} className={classes.tabPanel}>
-          <LichSuDonHang />
+          <LichSuDonHang seenOrderDetail={(orderDetail)=>seenOrderDetail(orderDetail)} orderDetail={orderDetail} />
         </TabPanel>
         <TabPanel value={statusUser} index={2} className={classes.tabPanel}>
           <LichSuGiaoDich />

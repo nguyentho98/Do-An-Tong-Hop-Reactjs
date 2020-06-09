@@ -3,7 +3,7 @@ var data=JSON.parse(localStorage.getItem('CART'))
 const productInitialState = {
     dataCart: data ? data: [],
     dataMaGG:[],
-    statusUser:0,
+    statusUser:1,
     stateViewThongTinUser:false,
     countQuantityCart:0,
 }

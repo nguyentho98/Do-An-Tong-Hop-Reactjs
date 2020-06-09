@@ -59,6 +59,17 @@ const useStyles = makeStyles(theme => ({
             boxShadow: 'none',
             backgroundColor: '#29b474',
         }
-    }
+    },
+    buttonSave:{
+        backgroundColor: '#ffb517',
+        color:'white',
+        textTransform: 'none',
+    },
+    buttonCancel:{
+        // backgroundColor: '#ffb517',
+        color:'white',
+        textTransform: 'none',
+        marginLeft:20,
+    },
 }));
 export default useStyles

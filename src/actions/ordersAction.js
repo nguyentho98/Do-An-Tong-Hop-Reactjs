@@ -20,11 +20,11 @@ export function failureGetOrders() {
     type: types.LOGIN_FAILURE,
   }
 }
-export function getOrders() {
+export function getOrders(id) {
   return (dispatch) => {
     dispatch(requestGetOrders())
     axios
-    .get('http://localhost:5000/api/orders')
+    .get('http://doanekko.com:8080/public/orders/'+id)
     .then(response => {
       // Handle success.
         dispatch(successGetOrders(response.data))  
@@ -32,6 +32,43 @@ export function getOrders() {
     .catch(error =>{
         console.log(error);
     })
+  }
+}
+export function requestGetOrderDetail() {
+  return {
+    type: types.GET_ORDERDETAIL_REQUEST,
+  }
+}
+
+export function successGetOrderDetail(orderDetail) {
+  return {
+    type: types.GET_ORDERDETAIL_SUCCESS,
+    orderDetail
+  }
+}
+
+export function failureGetOrderDetail() {
+  return {
+    type: types.GET_ORDERDETAIL_FAILURE,
+  }
+}
+export function getOrderDetail(id) {
+  return (dispatch) => {
+    dispatch(requestGetOrderDetail())
+    axios
+    .get('http://doanekko.com:8080/public/orderdetails/'+2)
+    .then(response => {
+      // Handle success.
+        dispatch(successGetOrderDetail(response.data))  
+    })
+    .catch(error =>{
+        console.log(error);
+    })
+  }
+}
+export function actStateViewOrderDetail() {
+  return {
+    type: types.STATE_VIEW_ORDERDETAIL,
   }
 }
 export function requestPostOrders() {
@@ -53,7 +90,6 @@ export function failurePostOrders() {
   }
 }
 export function postOrders(order) {
-  console.log("xin chao");
   return (dispatch) => {
     dispatch(requestPostOrders())
     axios
