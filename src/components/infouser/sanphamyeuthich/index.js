@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid, Typography, } from '@material-ui/core';
+import { Grid, Typography, Avatar, } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import Button from '@material-ui/core/Button';
@@ -14,8 +14,8 @@ import Paper from '@material-ui/core/Paper';
 import useStyles from './styles';
 import { connect } from 'react-redux';
 import { actAddToCart  } from '../../../actions/cartAction';
-import {actDeleteProductToLove } from '../../../actions/loveAction';
-function SanPhamYeuThich({dataLove,addCartSuceess,actAddToCart,addCartClose,actCountQuantityCart,dataCart,actDeleteProductToLove}) {
+import {actDeleteProductToLove ,deleteFavoutite} from '../../../actions/loveAction';
+function SanPhamYeuThich({dataLove,addCartSuceess,actAddToCart,addCartClose,actCountQuantityCart,dataCart,actDeleteProductToLove,deleteFavoutite}) {
     const classes = useStyles();
     const StyledTableRow = withStyles((theme) => ({
       root: {
@@ -64,11 +64,13 @@ function SanPhamYeuThich({dataLove,addCartSuceess,actAddToCart,addCartClose,actC
       }
       return temp;
     }
-    const onDelete = (product) => {
-      actDeleteProductToLove(product)  
+    const onDelete = (id) => {
+      console.log(id);
+      actDeleteProductToLove(id)  
+      deleteFavoutite(id)
     }
   
-      
+      console.log("tooooooo"+dataLove);
     return (
         <Grid className={classes.root}>
             <Typography variant="h5" className={classes.title}>Sản Phẩm Yêu Thích</Typography>
@@ -79,7 +81,7 @@ function SanPhamYeuThich({dataLove,addCartSuceess,actAddToCart,addCartClose,actC
                 <TableRow>
                     <StyledTableCell>Hình ảnh</StyledTableCell>
                     <StyledTableCell>Tên sản phẩm</StyledTableCell>
-                    <StyledTableCell >Tình trạng</StyledTableCell>
+                    {/* <StyledTableCell >Tình trạng</StyledTableCell> */}
                     <StyledTableCell >Đơn giá</StyledTableCell>
                     <StyledTableCell>Thao Tác</StyledTableCell>
                 </TableRow>
@@ -87,10 +89,12 @@ function SanPhamYeuThich({dataLove,addCartSuceess,actAddToCart,addCartClose,actC
                 <TableBody>
                 {dataLove.map((item) => (
                     <StyledTableRow key={item.id}>
-                    <StyledTableCell component="th" scope="row">{item.product.name}</StyledTableCell>
-                    <StyledTableCell ></StyledTableCell>
-                    <StyledTableCell>{item.fat}</StyledTableCell>
-                    <StyledTableCell >{item.product.price}</StyledTableCell>
+                    <StyledTableCell component="th" scope="row">
+                        <Avatar alt="Remy Sharp" src={"http://doanekko.com:8080/public/upload/" + item.product?.picture} className={classes.image}></Avatar>
+                    </StyledTableCell>
+                    <StyledTableCell >{item.product?.name}</StyledTableCell>
+                    {/* <StyledTableCell>{item.fat}</StyledTableCell> */}
+                    <StyledTableCell >{item.product?.price}</StyledTableCell>
                     <StyledTableCell style={{textAlign:'center'}}>
                       <StyledButton
                         variant="contained"
@@ -104,7 +108,7 @@ function SanPhamYeuThich({dataLove,addCartSuceess,actAddToCart,addCartClose,actC
                         variant="contained"
                         className={classes.buttonDelete}
                         startIcon={<CloseIcon />}
-                        onClick={()=>onDelete(item.product)}
+                        onClick={()=>onDelete(item.id)}
                       >
                       </StyledButton>
                     </StyledTableCell>
@@ -130,9 +134,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         dispatch(actAddToCart(payload, quantity))
     },
     actCountQuantityCart: (payload) => dispatch({ type: "actCountQuantityCart" ,payload}),
-    actDeleteProductToLove: (payload) => {
-      dispatch(actDeleteProductToLove(payload))
-  },
+    actDeleteProductToLove: (id) => {
+      dispatch(actDeleteProductToLove(id))
+    },
+    deleteFavoutite: (id) => {
+      dispatch(deleteFavoutite(id))
+    },
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(SanPhamYeuThich)

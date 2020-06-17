@@ -10,7 +10,7 @@ import tien from '../../utils/images/tien.png';
 import { connect } from 'react-redux';
 import { history } from './../../reducers/history';
 import { cleanup } from '@testing-library/react';
-const Example = ({ logout ,user,actThongTinUser,actLichSuDonHang,actLichSuGiaoDich,actSanPhamYeuThich}) => {
+const Example = ({ logout ,user,actThongTinUser,actLichSuDonHang,actLichSuGiaoDich,actSanPhamYeuThich,actResetCart}) => {
   const classes = useStyles();
   const [dropdownOpen, setDropdownOpen] = useState(false)
 //   useEffect(() => {
@@ -31,6 +31,7 @@ const Example = ({ logout ,user,actThongTinUser,actLichSuDonHang,actLichSuGiaoDi
   const onClickLogout = () => {
     history.push("/login");
     logout()
+    actResetCart()
   }
   const onClickThongTinTaiKhoan  = () => {
     actThongTinUser()
@@ -114,6 +115,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     actSanPhamYeuThich: () => {
       dispatch(actSanPhamYeuThich())
+    },
+    actResetCart: ()=>{
+      dispatch({type:"resetCart"})
     }
   }
 }

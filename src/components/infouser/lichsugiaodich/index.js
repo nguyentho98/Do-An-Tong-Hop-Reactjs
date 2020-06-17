@@ -9,7 +9,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import useStyles from './styles';
-export default function LichSuGiaoDich() {
+import moment from 'moment';
+import { connect } from 'react-redux';
+ function LichSuGiaoDich({dataRecharge}) {
     const classes = useStyles();
     const StyledTableCell = withStyles((theme) => ({
         head: {
@@ -32,17 +34,7 @@ export default function LichSuGiaoDich() {
         },
       }))(TableRow);
       
-      function createData(name, calories, fat, carbs, protein) {
-        return { name, calories, fat, carbs, protein };
-      }
-      
-      const rows = [
-        createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-        createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-        createData('Eclair', 262, 16.0, 24, 6.0),
-        createData('Cupcake', 305, 3.7, 67, 4.3),
-        createData('Gingerbread', 356, 16.0, 49, 3.9),
-      ];
+
     return (
         <Grid className={classes.root}>
             <Typography variant="h5" className={classes.title}>Lịch Sử Giao Dịch</Typography>
@@ -57,11 +49,11 @@ export default function LichSuGiaoDich() {
                 </TableRow>
                 </TableHead>
                 <TableBody>
-                {rows.map((row) => (
-                    <StyledTableRow key={row.name}>
-                    <StyledTableCell component="th" scope="row">{row.name}</StyledTableCell>
-                    <StyledTableCell >{row.calories}</StyledTableCell>
-                    <StyledTableCell>{row.fat}</StyledTableCell>
+                {dataRecharge.map((row) => (
+                    <StyledTableRow key={row.id}>
+                    <StyledTableCell component="th" scope="row">{moment(row.created_at).format("DD MMM YYYY")}</StyledTableCell>
+                    <StyledTableCell >{row.description}</StyledTableCell>
+                    <StyledTableCell>{row.total}</StyledTableCell>
                     </StyledTableRow>
                 ))}
                 </TableBody>
@@ -70,3 +62,15 @@ export default function LichSuGiaoDich() {
         </Grid>
     )
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    dataRecharge: state.rechargeReducer.dataRecharge,
+  }
+}
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    
+  }
+}
+export default connect(mapStateToProps, null)(LichSuGiaoDich)

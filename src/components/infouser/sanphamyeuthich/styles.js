@@ -29,5 +29,10 @@ const useStyles = makeStyles(theme => ({
         textTransform: 'none',
         minWidth:0,
     },
+    image:{
+        width:'110px',
+        borderRadius:'2%',
+        height:'60px',
+    },
 }));
 export default useStyles

@@ -11,6 +11,7 @@ import ordersReducer from '../reducers/ordersReducer';
 import categoryReducer from '../reducers/categoryReducer';
 import searchReducer from '../reducers/searchReducer';
 import loveReducer from '../reducers/loveReducer';
+import rechargeReducer from '../reducers/rechargeReducer';
 var redux = require('redux');   
 const allReducers=redux.combineReducers({
     productReducer:productReducer,
@@ -24,6 +25,7 @@ const allReducers=redux.combineReducers({
     categoryReducer:categoryReducer,
     searchReducer:searchReducer,
     loveReducer:loveReducer,
+    rechargeReducer:rechargeReducer,
 })
 var store=createStore(allReducers,applyMiddleware(thunk)); 
 

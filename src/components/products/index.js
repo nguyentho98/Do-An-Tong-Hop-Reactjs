@@ -10,12 +10,12 @@ import useStyles from './styles';
 import {  NavLink ,Redirect} from "react-router-dom";
 import { getLimitDataProduct ,actLimit,getAllDataProduct} from '../../actions/productAction';
 import { actAddToCart } from '../../actions/cartAction';
-import { actAddToLove } from '../../actions/loveAction';
+import { postLove } from '../../actions/loveAction';
 import { connect } from 'react-redux'
 import { history } from './../../reducers/history';
+import { getDataFavoutite } from '../../actions/loveAction';
 
-
-function Products({limitData,allData,actCountQuantityCart,loggedIn,actAddToLove,dataCart,getAllDataProduct, page,getLimitDataProduct, addCartSuceess, actAddToCart ,addCartClose,limit,actLimit}) {
+function Products({limitData,user,postLove,actCountQuantityCart,loggedIn,dataCart,getAllDataProduct, page,getLimitDataProduct, addCartSuceess, actAddToCart ,addCartClose,limit,actLimit}) {
     const classes = useStyles();
         useEffect(() => {
             actCountQuantityCart(countQuantityCart())
@@ -31,9 +31,8 @@ function Products({limitData,allData,actCountQuantityCart,loggedIn,actAddToLove,
     const onClickAddLoveSuccess = (item) => {
         addCartSuceess(item)
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-        actAddToLove(item)
         setTimeout(()=>addCartClose(),3000)
-        
+        postLove(item.id,user.id)
     }
     const onClickAddCarts = (item) => {
         actAddToCart(item)
@@ -133,7 +132,8 @@ const mapStateToProps = (state, ownProps) => {
         cartSuccess: state.productReducer.cartSuccess,
         loadMore: state.productReducer.loadMore,
         dataCart: state.cartReducer.dataCart,
-        loggedIn: state.loginReducer.loggedIn
+        loggedIn: state.loginReducer.loggedIn,
+        user: state.loginReducer.user,
     }
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -146,8 +146,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         actAddToCart: (payload) => {
             dispatch(actAddToCart(payload, 1))
         },
-        actAddToLove: (payload) => {
-            dispatch(actAddToLove(payload))
+        getDataFavoutite: (id) => {
+            dispatch(getDataFavoutite(id))
+        },
+        postLove: (product_id,customer_id) => {
+            dispatch(postLove(product_id,customer_id))
         },
     }
 }

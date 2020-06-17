@@ -1,16 +1,20 @@
 import * as types from '../constants/ActionTypes';
 var data=JSON.parse(localStorage.getItem('CART'))
-const productInitialState = {
+const initialState = {
     dataCart: data ? data: [],
     dataMaGG:[],
     statusUser:0,
     stateViewThongTinUser:false,
     countQuantityCart:0,
 }
-const cartReducer = (state = productInitialState, action) => {
+const cartReducer = (state = initialState, action) => {
     var {quantity,product}=action;
     var index=-1;
     switch (action.type) {
+        case "resetCart":
+            return {
+                ...state,dataCart:[]
+            }
         case types.ADD_TO_CART:{
             index=findProductInCart(state.dataCart,product);
             if(index !== -1){

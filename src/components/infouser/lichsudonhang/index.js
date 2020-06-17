@@ -15,12 +15,16 @@ import { getOrderDetail ,actStateViewOrderDetail} from '../../../actions/ordersA
 function LichSuDonHang({dataOrders,stateViewOrder,dataOrderDetail,getOrderDetail,actStateViewOrderDetail,seenOrderDetail,orderDetail}) {
     const classes = useStyles();
     const user=JSON.parse(localStorage.getItem('USER'))
-    
     const onClickXemChiTiet  = (row) => {
       getOrderDetail(row.id)
       actStateViewOrderDetail()
       seenOrderDetail(row)
     }  
+    useEffect(() => {
+      return () => {
+        actStateViewOrderDetail()
+      }
+    }, [])
     const StyledTableCell = withStyles((theme) => ({
         head: {
           backgroundColor: '#21beff',
@@ -63,7 +67,8 @@ function LichSuDonHang({dataOrders,stateViewOrder,dataOrderDetail,getOrderDetail
                     dataOrderDetail.map((item, key) =>
                         <Grid container className={classes.thanhtoan_carts_item}>
                             <Grid md={3}>
-                                <Avatar alt="Remy Sharp" src={""} className={classes.image}></Avatar>
+                            
+                                <Avatar alt="Remy Sharp" src={"http://doanekko.com:8080/public/upload/"+item.product.picture} className={classes.image}></Avatar>
                             </Grid>
                             <Grid md={5}>
                                 <Typography component="h3" variant="h5" className={classes.text_name}>{item.id}</Typography>
@@ -128,7 +133,7 @@ function LichSuDonHang({dataOrders,stateViewOrder,dataOrderDetail,getOrderDetail
                           </Grid>
                           <Grid className={classes.list_title_01}>
                               <Typography style={{ color: '#8e9098' }}>Email nhận key: </Typography>
-                              <Typography className={classes.title_text1}>nxtho0109@gmail.com   </Typography>
+                              <Typography className={classes.title_text1}>{orderDetail.customer.email}    </Typography>
                           </Grid>
                           
                       </Grid>
@@ -143,8 +148,8 @@ function LichSuDonHang({dataOrders,stateViewOrder,dataOrderDetail,getOrderDetail
                               <Typography className={classes.title_text}>0 </Typography>
                           </Grid>
                           <Grid className={classes.list_title_01}>
-                              <Typography style={{ color: '#8e9098' }}>Mã giảm giá: thodeptrai</Typography>
-                              <Typography className={classes.title_text}>0 </Typography>
+                         <Typography style={{ color: '#8e9098' }}>Mã giảm giá: </Typography>
+                              <Typography className={classes.title_text}>{orderDetail.discount.code} </Typography>
                           </Grid>
                           <Grid className={classes.list_title_01}>
                               <Typography className={classes.title1}>TỔNG TIỀN</Typography>
@@ -162,8 +167,8 @@ function LichSuDonHang({dataOrders,stateViewOrder,dataOrderDetail,getOrderDetail
                   <Grid md={12}>
                       <hr className={classes.duongke}></hr>
                       <Grid className={classes.list_title}>
-                          <Link to="/" style={{textDecoration: 'none', color: 'black', padding: 5, borderRadius: 4 }}>
-                                Lịch sử đơn hàng
+                          <Link onClick={()=>actStateViewOrderDetail()} style={{textDecoration: 'none', color: 'black', padding: 5, borderRadius: 4 }}>
+                                Quay lại
                           </Link>
                         
                       </Grid>

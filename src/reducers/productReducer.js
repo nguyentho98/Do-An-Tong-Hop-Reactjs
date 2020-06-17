@@ -26,10 +26,10 @@ switch (action.type) {
     }
     case types.GET_LIMITDATAPRODUCT_SUCCESS:
         const array=_.concat(state.limitDataProduct,action.data)
-    return {
-        ...state,
-        limitDataProduct:array
-    }
+        return {
+            ...state,
+            limitDataProduct:array
+        }
     case types.GET_ALLDATAPRODUCT_SUCCESS:
         return {
             ...state,

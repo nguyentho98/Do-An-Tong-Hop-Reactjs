@@ -80,3 +80,51 @@ export function actSanPhamYeuThich() {
   }
 }
 
+export function successGetCart(data) {
+  return {
+    type: types.GET_CART_SUCCESS,
+    data
+  }
+}
+export function getDataCart(id) {
+  return (dispatch) => {
+    fetch('http://doanekko.com:8080/public/carts/'+id, {
+      method: 'GET',
+        }).then(response => {
+              return response.json()
+        }).then(json => {    
+          dispatch(successGetCart(json))  
+      })
+      .catch((err) => console.log('err:', err))
+  }
+}
+
+export function successPostCart() {
+  return {
+    type: types.POST_CART_SUCCESS,
+  }
+}
+// export function postDataCart(carts) {
+//   return (dispatch) => {
+//     fetch('http://doanekko.com:8080/public/carts/' ,{
+//       headers: {
+//         "Content-Type": "application/json",
+//         "Accept": "application/json",
+//        },
+//       method: 'post',
+//       credentials: "same-origin",
+//         body:JSON.stringify({
+//           username: user.username,
+//           email:user.email,
+//           password: user.password,
+//           name:user.fullname,
+//           phone:user.phone
+//         }),  
+//       }).then(response => {
+//             return response.json()
+//       }).then(json => {       
+       
+//       })
+//       .catch((err) => console.log('err:', err))
+//       }
+// }

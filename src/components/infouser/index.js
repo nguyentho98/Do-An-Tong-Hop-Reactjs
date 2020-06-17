@@ -16,6 +16,8 @@ import SanPhamYeuThich from './sanphamyeuthich';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import { getOrders } from '../../actions/ordersAction';
+import { getRecharge } from '../../actions/rechargeAction';
+import { getDataFavoutite } from '../../actions/loveAction';
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
   return (
@@ -45,11 +47,13 @@ function a11yProps(index) {
   };
 }
 
- function InfoUser({user,statusUser,onClickItemUser, getOrders}) {
+ function InfoUser({user,statusUser,onClickItemUser,getRecharge, getOrders,getDataFavoutite,dataLove}) {
   const classes = useStyles();
   const [orderDetail, setOrderDetail] = React.useState([]);
   useEffect(() => {
     getOrders(user.id)
+    getDataFavoutite(user.id)
+    getRecharge(user.id)
     return () => {
       
     }
@@ -209,7 +213,8 @@ function a11yProps(index) {
 const mapStateToProps = (state, ownProps) => {
   return {
     user: state.loginReducer.user,
-    statusUser: state.cartReducer.statusUser
+    statusUser: state.cartReducer.statusUser, 
+    dataLove: state.loveReducer.dataLove, 
   }
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -219,6 +224,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     getOrders: (id) => {
       dispatch(getOrders(id))
+    },
+    getRecharge: (id) => {
+      dispatch(getRecharge(id))
+    },
+    getDataFavoutite: (id) => {
+      dispatch(getDataFavoutite(id))
     },
   }
 }
